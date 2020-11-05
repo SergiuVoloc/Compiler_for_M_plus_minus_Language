@@ -146,6 +146,7 @@
     <ClInclude Include="symbols.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="c.y" />
     <None Include="input.csrc" />
     <None Include="M+-.lex" />
   </ItemGroup>

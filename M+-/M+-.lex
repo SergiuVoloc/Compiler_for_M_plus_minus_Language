@@ -3,7 +3,7 @@ alpha		[a-zA-Z]
 
 %{
 #include <stdio.h>
-#include "symbols.h"
+#include "c.tab.h" 
 
 void count();
 %}
@@ -60,8 +60,8 @@ void count();
 ">"				{ count(); return(GT); }
 "=<"			{ count(); return(LE); }
 "=>"			{ count(); return(GE); }
-"("				{ count(); return(LPAR); }
-")"				{ count(); return(RPAR); }
+"("				{ count(); return('('); }
+")"				{ count(); return(')'); }
 "{"				{ count(); return(CLPAR); }
 "}"				{ count(); return(CRPAR); }
 "["				{ count(); return(SLPAR); }
