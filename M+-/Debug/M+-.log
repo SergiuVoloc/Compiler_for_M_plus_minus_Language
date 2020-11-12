@@ -1,2 +1,8 @@
-﻿  M+-.c
+﻿  c.tab.c
+  lex.yy.c
+M+-.lex(12,10): warning C4013: 'comment' undefined; assuming extern returning int
+lex.yy.c(1687,46): warning C4013: 'isatty' undefined; assuming extern returning int
+  M+-.c
+  Generating Code...
+D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-\M+-.lex(107): warning C4716: 'comment': must return a value
   M+-.vcxproj -> D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\Debug\M+-.exe

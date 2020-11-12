@@ -7,8 +7,12 @@
 
  
 extern FILE* yyin;
-extern int yylex(void);
-const char* lexUnits[] = { "END",//0
+//extern int yylex(void);
+extern int yydebug;
+extern int yyparse(void);
+
+
+const char* lexUnits[] = {  "END",//0
 							"INT",//1
 							"WHILE",//2
 							"FLOAT",//3
@@ -54,22 +58,41 @@ const char* lexUnits[] = { "END",//0
                             "LT",//43
                             "BEGIN"};//44
 
+
 int main()
 {
-	int tokenValue = 0;
+	//int lexUnit = 0;
+	yydebug = 1;
 	yyin = fopen("input.csrc", "rt");
 	if (yyin != NULL)
 	{
-		while ((tokenValue = yylex()) != END)
+		int result = yyparse();
+		switch (result)
 		{
-			printf(" -> TOKEN ID: %d; Token Value: %s \n", tokenValue, lexUnits[tokenValue]);
+		case 0:
+			printf("Parse successfull.\n");
+			break;
+
+		case 1:
+			printf("Invalid input encountered\n");
+			break;
+
+		case 2:
+			printf("Out of memory\n");
+			break;
+
+		default:
+			break;
 		}
+		/*while ((lexUnit = yylex()) != END)
+		{
+			printf(" -> TOKEN: %s\n", symbols[lexUnit]);
+		}*/
+		fclose(yyin);
 	}
 	else
 	{
-		printf("Fisierul de intrare nu poate fi deschis. Erorare: %d", errno);
+		printf("Fisier inexistent");
 	}
 
-
 }
-

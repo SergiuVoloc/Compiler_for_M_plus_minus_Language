@@ -18,24 +18,21 @@
     <ClCompile Include="M+-.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c.tab.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="lex.yy.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="symbols.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <None Include="c.y" />
+    <None Include="M+-.lex" />
+    <None Include="input.csrc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="input.csrc">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="M+-.lex">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="c.y">
-      <Filter>Resource Files</Filter>
-    </None>
+    <ClInclude Include="c.tab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

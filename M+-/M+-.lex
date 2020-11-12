@@ -17,8 +17,9 @@ void count();
 "while"		{ count(); return(WHILE); }
 "do"		{ count(); return(DO); }
 "read"		{ count(); return(READ); }
+"real"		{ count(); return(REAL); }
 "else"		{ count(); return(ELSE); }
-"begin"		{ count(); return(BEGIN); }
+"begin"		{ count(); return(BEGINN); }
 "end"		{ count(); return(END); }
 "int"		{ count(); return(INT); }
 "bool"		{ count(); return(BOOL); }
@@ -32,20 +33,7 @@ void count();
 "not"		{ count(); return(NOT); }
 "false"		{ count(); return(BVAL);} 
 "true"		{ count(); return(BVAL);}	
-
-
-
-({alpha}+)[_{digit}{alpha}]*	{ count(); return(ID);}
-{digit}+						{ count(); return(IVAL);}  
-{digit}*.{digit}+				{ count(); return(RVAL);}
-	
-
-
-
-{alpha}?\"(\\.|[^\\"])*\"		{ count(); return(STRING_LITERAL); }
-
-
-
+"print"		{ count(); return(PRINT);}
 
 
 ":="			{ count(); return(ASSIGN); }
@@ -60,15 +48,32 @@ void count();
 ">"				{ count(); return(GT); }
 "=<"			{ count(); return(LE); }
 "=>"			{ count(); return(GE); }
-"("				{ count(); return('('); }
-")"				{ count(); return(')'); }
+"("				{ count(); return(LPAR); }
+")"				{ count(); return(RPAR); }
 "{"				{ count(); return(CLPAR); }
 "}"				{ count(); return(CRPAR); }
 "["				{ count(); return(SLPAR); }
 "]"				{ count(); return(SRPAR); }
 ":"				{ count(); return(COLON); }
-";"				{ count(); return(SEMICLON); }
+";"				{ count(); return(SEMICOLON); }
 ","				{ count(); return(COMMA); }
+
+
+
+
+({alpha}+)([_{alpha}{digit}])*	{ count(); return(ID);}
+{digit}+						{ count(); return(IVAL);}  
+{digit}*.{digit}+				{ count(); return(RVAL);}
+	
+
+
+
+{alpha}?\"(\\.|[^\\"])*\"		{ count(); return(STRING_LITERAL); }
+
+
+
+
+
 
 [ \t\v\n\f]		{ count(); }
 .				{ /* ignore bad characters */ }

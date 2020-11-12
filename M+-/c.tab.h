@@ -89,19 +89,18 @@ extern int yydebug;
     READ = 290,                    /* READ  */
     RPAR = 291,                    /* RPAR  */
     RVAL = 292,                    /* RVAL  */
-    SEMICLON = 293,                /* SEMICLON  */
-    REAL = 294,                    /* REAL  */
-    PRINT = 295,                   /* PRINT  */
-    SEMICOLON = 296,               /* SEMICOLON  */
-    SIZE = 297,                    /* SIZE  */
-    SLPAR = 298,                   /* SLPAR  */
-    SRPAR = 299,                   /* SRPAR  */
-    SUB = 300,                     /* SUB  */
-    THEN = 301,                    /* THEN  */
-    VAR = 302,                     /* VAR  */
-    LPAR = 303,                    /* LPAR  */
-    LT = 304,                      /* LT  */
-    BEGIN = 305                    /* BEGIN  */
+    REAL = 293,                    /* REAL  */
+    PRINT = 294,                   /* PRINT  */
+    SEMICOLON = 295,               /* SEMICOLON  */
+    SIZE = 296,                    /* SIZE  */
+    SLPAR = 297,                   /* SLPAR  */
+    SRPAR = 298,                   /* SRPAR  */
+    SUB = 299,                     /* SUB  */
+    THEN = 300,                    /* THEN  */
+    VAR = 301,                     /* VAR  */
+    LPAR = 302,                    /* LPAR  */
+    LT = 303,                      /* LT  */
+    BEGINN = 304                   /* BEGINN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif

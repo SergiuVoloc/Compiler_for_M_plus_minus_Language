@@ -1,6 +1,9 @@
 
 %{
     #include <stdio.h>
+
+	int yyerror(char * s);
+	extern int yylex(void);
 %}
 
 %token END 
@@ -38,7 +41,6 @@
 %token READ 
 %token RPAR 
 %token RVAL   
-%token SEMICLON 
 %token REAL 
 %token PRINT
 %token SEMICOLON 
@@ -50,7 +52,7 @@
 %token VAR 
 %token LPAR 
 %token LT 
-%token BEGIN
+%token BEGINN
 
 
 %start prog
@@ -65,7 +67,7 @@ block
  ;
 
 declarations
- : declaration SEMICLON declarations 
+ : declaration SEMICOLON declarations 
  |
  ;
 
@@ -121,11 +123,11 @@ basic_array_dimensions
  ;
 
 program_body
- : BEGIN prog_stmts END
+ : BEGINN prog_stmts END
  ;
 
 fun_body 
- : BEGIN prog_stmts RETURN expr SEMICOLON END
+ : BEGINN prog_stmts RETURN expr SEMICOLON END
  ;
 
 prog_stmts
@@ -219,16 +221,16 @@ more_arguments
  ;
 
 prog_stmt
-  : IF '(' expr ')' THEN prog_stmt  ELSE prog_stmt 
-  | WHILE '(' expr ')' DO prog_stmt
-  | IDENTIFIER ASSIGN '(' expr ')'
-  | PRINT '(' expr ')'
+  : IF LPAR  RPAR THEN prog_stmt  ELSE prog_stmt 
+  | WHILE LPAR  RPAR DO prog_stmt
+  | IDENTIFIER ASSIGN RPAR expr ')'
+  | PRINT LPAR  RPAR
   ;
 %%
 
-void yyerror(char *s)
-/ yacc error handler */
-
-{
-    printf ("%s\n", s);
-}
+int yyerror(char * s) 
+/* yacc error handler */
+{    
+	printf ( "%s\n", s); 
+	return 0;
+}  
