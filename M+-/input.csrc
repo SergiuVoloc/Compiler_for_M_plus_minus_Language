@@ -1,4 +1,4 @@
-fun writematrix(a[][]:real):bool
+fun writeMatrix(a[][]:real):bool
 { var i:int; var j:int;
 begin
 i:= 0;
@@ -12,13 +12,13 @@ i := i + 1;
 end } ;
 return true;
 end } ;
-var X[2][2]:real;
+var X[ 2 ] [ 2 ] : real ;
 begin
-if read_matrix(X)
-then if mult_matrix(X,X,X)
-then if write_matrix(X)
-then {begin end}
-else {begin end}
-else {begin end}
-else {begin end } ;
+if readMatrix(X)
+then if multMatrix(X,X,X)
+then if writeMatrix(X)
+then { begin end }
+else { begin end }
+else { begin end }
+else { begin end } ;
 end
