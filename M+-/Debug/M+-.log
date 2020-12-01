@@ -1,8 +1,5 @@
-﻿  c.tab.c
-  lex.yy.c
-M+-.lex(12,10): warning C4013: 'comment' undefined; assuming extern returning int
-lex.yy.c(1687,46): warning C4013: 'isatty' undefined; assuming extern returning int
-  M+-.c
-  Generating Code...
-D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-\M+-.lex(107): warning C4716: 'comment': must return a value
-  M+-.vcxproj -> D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\Debug\M+-.exe
+﻿  lex.yy.c
+c.y(14,2): error C2061: syntax error: identifier 'Node'
+c.tab.h(121,1): error C2059: syntax error: '}'
+M+-.lex(15,10): warning C4013: 'comment' undefined; assuming extern returning int
+lex.yy.c(1690,46): warning C4013: 'isatty' undefined; assuming extern returning int

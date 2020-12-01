@@ -1,24 +1,7 @@
-fun writeMatrix(a[][]:real):bool
-{ var i:int; var j:int;
-begin
-i:= 0;
-while i < size(a[]) do {begin
-j:=0;
-while j < size(a[]) do {begin
-j := j + 1;
-print a[i][j];
-end } ;
-i := i + 1;
-end } ;
-return true;
-end } ;
-var X[ 2 ] [ 2 ] : real ;
-begin
-if readMatrix(X)
-then if multMatrix(X,X,X)
-then if writeMatrix(X)
-then { begin end }
-else { begin end }
-else { begin end }
-else { begin end } ;
-end
+int ab = 120;
+
+int abcd(int a){
+	int ab;
+	if( jhhjsd){}
+
+}

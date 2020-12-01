@@ -1,0 +1,153 @@
+﻿  c.y:114.128-129: error: integer out of range: ‘$3’
+    114 | ...{ $$ = $3; addLinkToList($$, $1);} 
+        |             ^~
+  c.y:114.150-151: error: integer out of range: ‘$1’
+    114 | ...List($$, $1);} 
+        |             ^~
+  c.y:125.113-114: error: $1 of ‘var_declaration’ has no declared type
+    125 | ...tionNode($1, $2, $3, $5);}
+        |             ^~
+  c.y:125.117-118: error: $2 of ‘var_declaration’ has no declared type
+    125 | ...Node($1, $2, $3, $5);}
+        |             ^~
+  c.y:136.128-129: error: integer out of range: ‘$4’
+    136 | ...{ $$ = $4; addLinkToList($$, $2);} 
+        |             ^~
+  c.y:136.150-151: error: integer out of range: ‘$2’
+    136 | ...List($$, $2);} 
+        |             ^~
+  c.y:141.97-98: error: $1 of ‘fun_declaration’ has no declared type
+    141 | ...tionNode($1, $2, $3, $5, $7);}  
+        |             ^~
+  c.y:141.101-102: error: $2 of ‘fun_declaration’ has no declared type
+    141 | ...Node($1, $2, $3, $5, $7);}  
+        |             ^~
+  c.y:162.128-129: error: integer out of range: ‘$3’
+    162 | ...{ $$ = $3; addLinkToList($$, $2);} 
+        |             ^~
+  c.y:162.150-151: error: integer out of range: ‘$2’
+    162 | ...List($$, $2);} 
+        |             ^~
+  c.y:157.3: warning: empty rule for typed nonterminal, and no action [-Wother]
+    157 |  |
+        |   ^
+  c.y:170.4-37: warning: type clash on default action: <node> != <> [-Wother]
+    170 |  : SLPAR SRPAR basic_array_dimensions                        
+        |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  c.y:171.3: warning: empty rule for typed nonterminal, and no action [-Wother]
+    171 |  |
+        |   ^
+  c.y:175.4-24: warning: type clash on default action: <node> != <> [-Wother]
+    175 |  : BEGINN prog_stmts END
+        |    ^~~~~~~~~~~~~~~~~~~~~
+  c.y:179.4-46: warning: type clash on default action: <node> != <> [-Wother]
+    179 |  : BEGINN prog_stmts RETURN expr SEMICOLON END
+        |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  c.y:184.3: warning: empty rule for typed nonterminal, and no action [-Wother]
+    184 |  |
+        |   ^
+  c.y:188.5-41: warning: type clash on default action: <node> != <> [-Wother]
+    188 |   : IF expr THEN prog_stmt ELSE prog_stmt
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  c.y:189.5-27: warning: type clash on default action: <node> != <> [-Wother]
+    189 |   | WHILE expr DO prog_stmt
+        |     ^~~~~~~~~~~~~~~~~~~~~~~
+  c.y:190.5-19: warning: type clash on default action: <node> != <> [-Wother]
+    190 |   | READ identifier
+        |     ^~~~~~~~~~~~~~~
+  c.y:192.5-14: warning: type clash on default action: <node> != <> [-Wother]
+    192 |   | PRINT expr
+        |     ^~~~~~~~~~
+  c.y:193.5-21: warning: type clash on default action: <node> != <> [-Wother]
+    193 |   | CLPAR block CRPAR
+        |     ^~~~~~~~~~~~~~~~~
+  c.y:197.4-22: warning: type clash on default action: <node> != <> [-Wother]
+    197 |  : ID array_dimensions
+        |    ^~~~~~~~~~~~~~~~~~~
+  c.y:211.4-18: warning: type clash on default action: <node> != <> [-Wother]
+    211 |  : NOT bint_factor
+        |    ^~~~~~~~~~~~~~~
+  c.y:217.4-8: warning: type clash on default action: <node> != <> [-Wother]
+    217 |  : EQUAL
+        |    ^~~~~
+  c.y:218.4-5: warning: type clash on default action: <node> != <> [-Wother]
+    218 |  | LT
+        |    ^~
+  c.y:219.4-5: warning: type clash on default action: <node> != <> [-Wother]
+    219 |  | GT
+        |    ^~
+  c.y:220.4-5: warning: type clash on default action: <node> != <> [-Wother]
+    220 |  | LE
+        |    ^~
+  c.y:221.4-5: warning: type clash on default action: <node> != <> [-Wother]
+    221 |  | GE
+        |    ^~
+  c.y:230.4-6: warning: type clash on default action: <node> != <> [-Wother]
+    230 |  : ADD
+        |    ^~~
+  c.y:231.4-6: warning: type clash on default action: <node> != <> [-Wother]
+    231 |  | SUB
+        |    ^~~
+  c.y:240.4-6: warning: type clash on default action: <node> != <> [-Wother]
+    240 |  : MUL
+        |    ^~~
+  c.y:241.4-6: warning: type clash on default action: <node> != <> [-Wother]
+    241 |  | DIV
+        |    ^~~
+  c.y:245.4-17: warning: type clash on default action: <node> != <> [-Wother]
+    245 |  : LPAR expr RPAR
+        |    ^~~~~~~~~~~~~~
+  c.y:246.4-43: warning: type clash on default action: <node> != <> [-Wother]
+    246 |  | SIZE LPAR ID basic_array_dimensions RPAR
+        |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  c.y:247.4-23: warning: type clash on default action: <node> != <> [-Wother]
+    247 |  | FLOAT LPAR expr RPAR
+        |    ^~~~~~~~~~~~~~~~~~~~
+  c.y:248.4-23: warning: type clash on default action: <node> != <> [-Wother]
+    248 |  | FLOOR LPAR expr RPAR
+        |    ^~~~~~~~~~~~~~~~~~~~
+  c.y:249.4-22: warning: type clash on default action: <node> != <> [-Wother]
+    249 |  | CEIL LPAR expr RPAR
+        |    ^~~~~~~~~~~~~~~~~~~
+  c.y:250.4-19: warning: type clash on default action: <node> != <> [-Wother]
+    250 |  | ID modifier_list
+        |    ^~~~~~~~~~~~~~~~
+  c.y:251.4-7: warning: type clash on default action: <node> != <> [-Wother]
+    251 |  | IVAL
+        |    ^~~~
+  c.y:252.4-7: warning: type clash on default action: <node> != <> [-Wother]
+    252 |  | RVAL
+        |    ^~~~
+  c.y:253.4-7: warning: type clash on default action: <node> != <> [-Wother]
+    253 |  | BVAL
+        |    ^~~~
+  c.y:254.4-17: warning: type clash on default action: <node> != <> [-Wother]
+    254 |  | SUB int_factor
+        |    ^~~~~~~~~~~~~~
+  c.y:258.4-22: warning: type clash on default action: <node> != <> [-Wother]
+    258 |  : LPAR arguments RPAR
+        |    ^~~~~~~~~~~~~~~~~~~
+  c.y:264.3: warning: empty rule for typed nonterminal, and no action [-Wother]
+    264 |  |
+        |   ^
+  c.y:268.4-28: warning: type clash on default action: <node> != <> [-Wother]
+    268 |  : COMMA expr more_arguments 
+        |    ^~~~~~~~~~~~~~~~~~~~~~~~~
+  c.y:269.3: warning: empty rule for typed nonterminal, and no action [-Wother]
+    269 |  |
+        |   ^
+  c.y:273.5-48: warning: type clash on default action: <node> != <> [-Wother]
+    273 |   : IF LPAR  RPAR THEN prog_stmt  ELSE prog_stmt 
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  c.y:274.5-33: warning: type clash on default action: <node> != <> [-Wother]
+    274 |   | WHILE LPAR  RPAR DO prog_stmt
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  c.y:275.5-35: warning: type clash on default action: <node> != <> [-Wother]
+    275 |   | IDENTIFIER ASSIGN RPAR expr ')'
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  c.y:276.5-20: warning: type clash on default action: <node> != <> [-Wother]
+    276 |   | PRINT LPAR  RPAR
+        |     ^~~~~~~~~~~~~~~~
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(143,5): error MSB3073: The command "win_flex M+-.lex
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(143,5): error MSB3073: win_bison c.y --defines
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(143,5): error MSB3073: :VCEnd" exited with code -1073741819.

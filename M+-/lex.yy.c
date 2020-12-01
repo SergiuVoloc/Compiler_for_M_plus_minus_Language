@@ -560,12 +560,15 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "M+-.lex"
 #line 5 "M+-.lex"
+
 #include <stdio.h>
 #include "c.tab.h" 
+#include "ast.h"
+
 
 void count();
-#line 567 "lex.yy.c"
-#line 568 "lex.yy.c"
+#line 570 "lex.yy.c"
+#line 571 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -782,9 +785,9 @@ YY_DECL
 		}
 
 	{
-#line 11 "M+-.lex"
+#line 14 "M+-.lex"
 
-#line 787 "lex.yy.c"
+#line 790 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -843,267 +846,267 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 12 "M+-.lex"
+#line 15 "M+-.lex"
 { comment(); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 13 "M+-.lex"
+#line 16 "M+-.lex"
 { comment(); } 
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 15 "M+-.lex"
+#line 18 "M+-.lex"
 { count(); return(IF); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 16 "M+-.lex"
+#line 19 "M+-.lex"
 { count(); return(THEN); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 17 "M+-.lex"
+#line 20 "M+-.lex"
 { count(); return(WHILE); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 18 "M+-.lex"
+#line 21 "M+-.lex"
 { count(); return(DO); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 19 "M+-.lex"
+#line 22 "M+-.lex"
 { count(); return(READ); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 20 "M+-.lex"
+#line 23 "M+-.lex"
 { count(); return(REAL); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 21 "M+-.lex"
+#line 24 "M+-.lex"
 { count(); return(ELSE); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 22 "M+-.lex"
+#line 25 "M+-.lex"
 { count(); return(BEGINN); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 23 "M+-.lex"
+#line 26 "M+-.lex"
 { count(); return(END); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 24 "M+-.lex"
+#line 27 "M+-.lex"
 { count(); return(INT); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 25 "M+-.lex"
+#line 28 "M+-.lex"
 { count(); return(BOOL); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 26 "M+-.lex"
+#line 29 "M+-.lex"
 { count(); return(VAR); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 27 "M+-.lex"
+#line 30 "M+-.lex"
 { count(); return(SIZE); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 28 "M+-.lex"
+#line 31 "M+-.lex"
 { count(); return(FLOAT); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 29 "M+-.lex"
+#line 32 "M+-.lex"
 { count(); return(FLOOR); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 30 "M+-.lex"
+#line 33 "M+-.lex"
 { count(); return(CEIL); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 31 "M+-.lex"
+#line 34 "M+-.lex"
 { count(); return(FUN); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 32 "M+-.lex"
+#line 35 "M+-.lex"
 { count(); return(RETURN);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 33 "M+-.lex"
+#line 36 "M+-.lex"
 { count(); return(NOT); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 34 "M+-.lex"
+#line 37 "M+-.lex"
 { count(); return(BVAL);} 
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 35 "M+-.lex"
+#line 38 "M+-.lex"
 { count(); return(BVAL);}	
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 36 "M+-.lex"
+#line 39 "M+-.lex"
 { count(); return(PRINT);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 39 "M+-.lex"
+#line 42 "M+-.lex"
 { count(); return(ASSIGN); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 40 "M+-.lex"
+#line 43 "M+-.lex"
 { count(); return(ADD); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 41 "M+-.lex"
+#line 44 "M+-.lex"
 { count(); return(SUB); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 42 "M+-.lex"
+#line 45 "M+-.lex"
 { count(); return(MUL); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 43 "M+-.lex"
+#line 46 "M+-.lex"
 { count(); return(DIV); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 44 "M+-.lex"
+#line 47 "M+-.lex"
 { count(); return(AND); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 45 "M+-.lex"
+#line 48 "M+-.lex"
 { count(); return(OR); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 46 "M+-.lex"
+#line 49 "M+-.lex"
 { count(); return(EQUAL); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 47 "M+-.lex"
+#line 50 "M+-.lex"
 { count(); return(LT); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 48 "M+-.lex"
+#line 51 "M+-.lex"
 { count(); return(GT); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 49 "M+-.lex"
+#line 52 "M+-.lex"
 { count(); return(LE); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 50 "M+-.lex"
+#line 53 "M+-.lex"
 { count(); return(GE); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 51 "M+-.lex"
+#line 54 "M+-.lex"
 { count(); return(LPAR); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 52 "M+-.lex"
+#line 55 "M+-.lex"
 { count(); return(RPAR); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 53 "M+-.lex"
+#line 56 "M+-.lex"
 { count(); return(CLPAR); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 54 "M+-.lex"
+#line 57 "M+-.lex"
 { count(); return(CRPAR); }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 55 "M+-.lex"
+#line 58 "M+-.lex"
 { count(); return(SLPAR); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 56 "M+-.lex"
+#line 59 "M+-.lex"
 { count(); return(SRPAR); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 57 "M+-.lex"
+#line 60 "M+-.lex"
 { count(); return(COLON); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 58 "M+-.lex"
+#line 61 "M+-.lex"
 { count(); return(SEMICOLON); }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 59 "M+-.lex"
+#line 62 "M+-.lex"
 { count(); return(COMMA); }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 64 "M+-.lex"
+#line 67 "M+-.lex"
 { count(); return(ID);}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 65 "M+-.lex"
+#line 68 "M+-.lex"
 { count(); return(IVAL);}  
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 66 "M+-.lex"
+#line 69 "M+-.lex"
 { count(); return(RVAL);}
 	YY_BREAK
 case 49:
 /* rule 49 can match eol */
 YY_RULE_SETUP
-#line 71 "M+-.lex"
+#line 74 "M+-.lex"
 { count(); return(STRING_LITERAL); }
 	YY_BREAK
 case 50:
 /* rule 50 can match eol */
 YY_RULE_SETUP
-#line 78 "M+-.lex"
+#line 81 "M+-.lex"
 { count(); }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 79 "M+-.lex"
+#line 82 "M+-.lex"
 { /* ignore bad characters */ }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 83 "M+-.lex"
+#line 86 "M+-.lex"
 ECHO;
 	YY_BREAK
-#line 1106 "lex.yy.c"
+#line 1109 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2108,7 +2111,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 83 "M+-.lex"
+#line 86 "M+-.lex"
 
 
 yywrap()

@@ -2,8 +2,11 @@ digit		[0-9]
 alpha		[a-zA-Z]
 
 %{
+
 #include <stdio.h>
+#include "ast.h"
 #include "c.tab.h" 
+
 
 void count();
 %}

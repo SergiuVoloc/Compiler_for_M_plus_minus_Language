@@ -1,10 +1,20 @@
-
 %{
-    #include <stdio.h>
 
-	int yyerror(char * s);
-	extern int yylex(void);
+#include <stdio.h>
+#include "ast.h"
+
+
+Node* astRoot = NULL;
+int yyerror(char * s);
+extern int yylex(void);
+
 %}
+%union{
+	
+	Node	*node;
+	char* strings;
+	int intVal;
+}
 
 %token END 
 %token INT 
@@ -54,178 +64,214 @@
 %token LT 
 %token BEGINN
 
+%type <node> prog
+%type <node> block
+%type <node> declarations
+%type <node> declaration
+%type <node> var_declaration
+%type <node> type
+%type <node> array_dimensions
+%type <node> fun_declaration
+%type <node> fun_block 
+%type <node> param_list
+%type <node> parameters
+%type <node> more_parameters
+%type <node> basic_declaration
+%type <node> basic_array_dimensions
+%type <node> program_body
+%type <node> fun_body
+%type <node> prog_stmts
+%type <node> prog_stmt
+%type <node> identifier
+%type <node> expr
+%type <node> bint_term
+%type <node> bint_factor
+%type <node> compare_op
+%type <node> int_expr
+%type <node> addop
+%type <node> int_term
+%type <node> mulop 
+%type <node> int_factor
+%type <node> modifier_list
+%type <node> arguments
+%type <node> more_arguments
+
+
 
 %start prog
 %%
 
+
 prog 
- : block
+ : block													{ $$ = createProgNode($1); astRoot = $$;}
  ;
+
 
 block
- : declarations program_body
- ;
+ : declarations program_body								{ $$ = createBlockNode($1,$2);}
+ ;			
+
 
 declarations
- : declaration SEMICOLON declarations 
- |
+ : declaration SEMICOLON declarations						{ $$ = createDeclarationsNode($1, $3);}
+ |															{ $$ = NULL;}
  ;
+
 
 declaration
- : var_declaration
- | fun_declaration
- ;
+ : var_declaration											{ $$ = createDeclarationNode($1);}
+ | fun_declaration											{ $$ = createDeclarationNode($1);}
+ ;	
+
 
 var_declaration
- : VAR ID array_dimensions COLON type
+ : VAR ID array_dimensions COLON type						{ $$ = createVarDeclarationNode($3, $5);}
  ;
 
 type 
- : INT
- | REAL
- | BOOL
+ : INT														{ $$ = createType("INT");}
+ | REAL														{ $$ = createType("REAL");}
+ | BOOL														{ $$ = createType("BOOL");}
  ;
 
 array_dimensions
- : SLPAR expr SRPAR array_dimensions 
- |
+ : SLPAR expr SRPAR array_dimensions						{  $$ = $4; addLinkToList($$, $2);}															 	
+ |															{ $$ = NULL;}
  ;
+
 
 fun_declaration
- : FUN ID param_list COLON type CLPAR fun_block CRPAR
+ : FUN ID param_list COLON type CLPAR fun_block CRPAR		{ $$ = createFunDeclarationNode($3, $5, $7);}  
  ;
+
 
 fun_block
- : declarations fun_body
+ : declarations fun_body									{ $$ = createFunBlockNode($1, $2);} 
  ;
+
 
 param_list
- : LPAR parameters RPAR
+ : LPAR parameters RPAR										{ $$ = createParamListNode("ParametersList", $2);} 			
  ;
 
+
 parameters
- : basic_declaration more_parameters 
- |
+ : basic_declaration more_parameters						{ $$ = createParametersNode($1, $2);}
+ |															{ $$ = NULL;}
  ;
 
 more_parameters
- : COMMA basic_declaration more_parameters 
- |
+ : COMMA basic_declaration more_parameters					{ $$ = createMoreParametersNode($2, $3);}
+ |															{ $$ = NULL;} 
  ;
 
 basic_declaration
- : ID basic_array_dimensions COLON type 
+ : ID basic_array_dimensions COLON type						{ $$ = createBasicDeclarationNode($2, $4);}
  ;
 
 basic_array_dimensions 
- : SLPAR SRPAR basic_array_dimensions 
- |
+ : SLPAR SRPAR basic_array_dimensions						{ $$ = $3; addLinkToList($$, $3);}		
+ |															{ $$ = NULL;}
  ;
-
-program_body
- : BEGINN prog_stmts END
+									
+program_body																						
+ : BEGINN prog_stmts END									{ $$ = createProgramBodyNode($2);}
  ;
 
 fun_body 
- : BEGINN prog_stmts RETURN expr SEMICOLON END
+ : BEGINN prog_stmts RETURN expr SEMICOLON END				{ $$ = createFunBodyNode($2,$4);}
  ;
 
-prog_stmts
- : prog_stmt SEMICOLON prog_stmts 
- |
+prog_stmts		
+ : prog_stmt SEMICOLON prog_stmts							{ $$ = createProgStmtsNode($1,$3);}
+ |															{ $$ = NULL;}
  ;
 
  prog_stmt
-  : IF expr THEN prog_stmt ELSE prog_stmt
-  | WHILE expr DO prog_stmt
-  | READ identifier
-  | identifier ASSIGN expr
-  | PRINT expr
-  | CLPAR block CRPAR
+  : IF expr THEN prog_stmt ELSE prog_stmt					{ $$ = createIfStatement($2, $4, $6);}
+  | WHILE expr DO prog_stmt									{ $$ = createWhileStatement($2, $4);}
+  | READ identifier											{ $$ = createIdentifier($2);}
+  | identifier ASSIGN expr									{ $$ = createProgStmtNode($1,$3);}
+  | PRINT expr												{ $$ = createProgStmtNode($2);}
+  | CLPAR block CRPAR										{ $$ = createProgStmtNode($2);}
   ;
 
 identifier
- : ID array_dimensions
+ : ID array_dimensions										{ $$ = createIdentifierNode($2);}
  ;
 
 expr
- : expr OR bint_term
- | bint_term
+ : expr OR bint_term										{ $$ = createExprOrBindTermNode($1,$3);}
+ | bint_term												{ $$ = createBintTermExprNode($1);}
  ;
 
 bint_term 
- : bint_term AND bint_factor
- | bint_factor
- ;
+ : bint_term AND bint_factor								{ $$ = createBindTermNode($1,$3);}
+ | bint_factor												{ $$ = createBindTermNode($1);}
+ ;	
 
 bint_factor 
- : NOT bint_factor
- | int_expr compare_op int_expr
- | int_expr
+ : NOT bint_factor											{ $$ = createBindFactorNode($2);}
+ | int_expr compare_op int_expr								{ $$ = createBindFactorNode($1,$2,$3);}
+ | int_expr													{ $$ = createBindFactorNode($1);}	
  ;
 
 compare_op 
- : EQUAL
- | LT
- | GT
- | LE
- | GE
+ : EQUAL													{ $$ = createEqualNode("EQUAL");}
+ | LT														{ $$ = createLessThanNode("LT");}
+ | GT														{ $$ = createGreaterNode("GT");}
+ | LE														{ $$ = createLessOrEqualNode("LE");}
+ | GE														{ $$ = createGreaterOrEqualNode("GE");}
  ;
 
 int_expr 
- : int_expr addop int_term 
- | int_term
+ : int_expr addop int_term									{ $$ = createIntExpressionNode($1,$2,$3);}
+ | int_term													{ $$ = createIntExpressionNode($1);}
  ;
 
 addop 
- : ADD
- | SUB
+ : ADD														{ $$ = createAdditionNode("ADD");}
+ | SUB														{ $$ = createSubtractionNode("SUBB");}
  ;
 
 int_term
- : int_term mulop int_factor 
- | int_factor
+ : int_term mulop int_factor								{ $$ = createIntTermNode($1,$2,$3);}		
+ | int_factor												{ $$ = createIntTermNode($1);}
  ;
 
 mulop
- : MUL
- | DIV
+ : MUL														{ $$ = createMultiplyNode("MUL");}
+ | DIV														{ $$ = createDivideNode("DIV");}
  ;
 
 int_factor
- : LPAR expr RPAR
- | SIZE LPAR ID basic_array_dimensions RPAR
- | FLOAT LPAR expr RPAR
- | FLOOR LPAR expr RPAR
- | CEIL LPAR expr RPAR
- | ID modifier_list
- | IVAL
- | RVAL
- | BVAL
- | SUB int_factor
+ : LPAR expr RPAR											{ $$ = createIntFactorNode($2);}
+ | SIZE LPAR ID basic_array_dimensions RPAR					{ $$ = createIntFactorNode($4);}
+ | FLOAT LPAR expr RPAR										{ $$ = createIntFactorNode($3);}
+ | FLOOR LPAR expr RPAR										{ $$ = createIntFactorNode($3);}
+ | CEIL LPAR expr RPAR										{ $$ = createIntFactorNode($3);}
+ | ID modifier_list											{ $$ = createIntFactorNode($2);}
+ | IVAL														{ $$ = createIntFactorNode("IVAL");}	
+ | RVAL														{ $$ = createIntFactorNode("RVAL");}
+ | BVAL														{ $$ = createIntFactorNode("BVAL");}
+ | SUB int_factor											{ $$ = createIntFactorNode($2);}	
  ;
 
 modifier_list 
- : LPAR arguments RPAR
- | array_dimensions
+ : LPAR arguments RPAR										{ $$ = createModifierListNode($2);}
+ | array_dimensions											{ $$ = createModifierListNode($1);}
  ;
 
 arguments
- : expr more_arguments 
- |
+ : expr more_arguments										{ $$ = createArgumentsNode($1,$2);}
+ |															{ $$ = NULL;}
  ;
 
-more_arguments
- : COMMA expr more_arguments 
- |
+more_arguments	
+ : COMMA expr more_arguments								{ $$ = createMoreArgumentsNode($2,$3);}
+ |															{ $$ = NULL;}
  ;
 
-prog_stmt
-  : IF LPAR  RPAR THEN prog_stmt  ELSE prog_stmt 
-  | WHILE LPAR  RPAR DO prog_stmt
-  | IDENTIFIER ASSIGN RPAR expr ')'
-  | PRINT LPAR  RPAR
-  ;
 %%
 
 int yyerror(char * s) 
