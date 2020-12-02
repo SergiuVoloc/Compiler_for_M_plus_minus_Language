@@ -44,6 +44,14 @@ Node* createListNode(const char* listName, Node* firstLink)
 	return retNode;
 }
 
+Node* createEmptyListNode(const char* listName)
+{
+	Node* retNode = createDefaultNode(listName, 0);
+	return retNode;
+}
+
+
+
 void addLinkToList(Node* listNode, Node* linkToAdd)
 {
 	unsigned int numLinks = listNode->numLinks;
@@ -94,6 +102,11 @@ Node* createDeclarationNode(Node* varFunDeclaration)
 	return retNode;
 }
 
+Node* createVarDeclarationNode(Node* arrayDim, Node* type)
+{
+	return NULL;
+}
+
 
 Node* createType(const char* typeName)
 {
@@ -103,23 +116,194 @@ Node* createType(const char* typeName)
 	return retVal;
 }
 
-Node* createVarDeclarationNode(char* var, const char* ID, Node* arrayDim, Node* type) {
-	Node* retNode = createDefaultNode("VarDeclaration", 2);
-
-	if (var)
-		sprintf(retNode->extraData, "%s", var);
-
-
-	if (retNode)
-	{
-		retNode->links[0] = arrayDim;
-		retNode->links[1] = type;
-		if (var)
-			sprintf(retNode->extraData, "%s", var);
-		sprintf(retNode->links[2]->extraData, "%s", ID);
-	}
-	return retNode;
+Node* createArrayDimensionsNode()
+{
+	return NULL;
 }
+
+Node* createFunDeclarationNode()
+{
+	return NULL;
+}
+
+Node* createFunBlockNode()
+{
+	return NULL;
+}
+
+Node* createParamListNode()
+{
+	return NULL;
+}
+
+Node* createParametersNode()
+{
+	return NULL;
+}
+
+Node* createMoreParametersNode()
+{
+	return NULL;
+}
+
+Node* createBasicDeclarationNode()
+{
+	return NULL;
+}
+
+Node* createBasicArrayDimensionsNode()
+{
+	return NULL;
+}
+
+Node* createProgramBodyNode()
+{
+	return NULL;
+}
+
+Node* createFunBodyNode()
+{
+	return NULL;
+}
+
+Node* createProgStmtNode()
+{
+	return NULL;
+}
+
+Node* createProgStmtsNode()
+{
+	return NULL;
+}
+
+
+Node* createWhileStatement()
+{
+	return NULL;
+}
+
+Node* createIdentifier()
+{
+	return NULL;
+}
+
+Node* createIdentifierNode()
+{
+	return NULL;
+}
+
+Node* createExprOrBintTermNode()
+{
+	return NULL;
+}
+
+Node* createBintTermExprNode()
+{
+	return NULL;
+}
+
+Node* createBintTermNode()
+{
+	return NULL;
+}
+
+Node* createBintFactorNode()
+{
+	return NULL;
+}
+
+Node* createEqualNode()
+{
+	return NULL;
+}
+
+Node* createLessThanNode()
+{
+	return NULL;
+}
+
+Node* createGreaterNode()
+{
+	return NULL;
+}
+
+Node* createLessOrEqualNode()
+{
+	return NULL;
+}
+
+Node* createGreaterOrEqualNode()
+{
+	return NULL;
+}
+
+Node* createIntExpressionNode()
+{
+	return NULL;
+}
+
+Node* createAdditionNode()
+{
+	return NULL;
+}
+
+Node* createSubtractionNode()
+{
+	return NULL;
+}
+
+Node* createIntTermNode()
+{
+	return NULL;
+}
+
+Node* createMultiplyNode()
+{
+	return NULL;
+}
+
+Node* createDivideNode()
+{
+	return NULL;
+}
+
+Node* createIntFactorNode()
+{
+	return NULL;
+}
+
+Node* createModifierListNode()
+{
+	return NULL;
+}
+
+Node* createArgumentsNode()
+{
+	return NULL;
+}
+
+Node* createMoreArgumentsNode()
+{
+	return NULL;
+}
+//
+//Node* createVarDeclarationNode(char* var, const char* ID, Node* arrayDim, Node* type) {
+//	Node* retNode = createDefaultNode("VarDeclaration", 2);
+//
+//	if (var)
+//		sprintf(retNode->extraData, "%s", var);
+//
+//
+//	if (retNode)
+//	{
+//		retNode->links[0] = arrayDim;
+//		retNode->links[1] = type;
+//		if (var)
+//			sprintf(retNode->extraData, "%s", var);
+//		sprintf(retNode->links[2]->extraData, "%s", ID);
+//	}
+//	return retNode;
+//}
 
 
 Node* createFunctionDeclarationNode(Node* typeSpecifier, const char* functionName, Node* paramsList, Node* compoundStatement)
@@ -167,7 +351,7 @@ Node* createCompoundStatement(Node* localDeclList, Node* instructionsList)
 Node* createIfStatement(const char* identifierName, Node* thenStatement, Node* elseStatement)
 {
 
-	Node* retNode = createDefaultNode("IfStatement", 2);
+	Node* retNode = createDefaultNode("createIfStatement", 2);
 	retNode->links[0] = thenStatement;
 	retNode->links[1] = elseStatement;
 	if (identifierName)

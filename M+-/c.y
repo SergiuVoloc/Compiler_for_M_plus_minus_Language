@@ -135,8 +135,8 @@ type
  ;
 
 array_dimensions
- : SLPAR expr SRPAR array_dimensions						{  $$ = $4; addLinkToList($$, $2);}															 	
- |															{ $$ = NULL;}
+ : SLPAR expr SRPAR array_dimensions						{ $$ = $4; addLinkToList($$, $2);}															 	
+ |															{ $$ = createEmptyListNode("ArrayDimensions");}
  ;
 
 
@@ -170,8 +170,8 @@ basic_declaration
  ;
 
 basic_array_dimensions 
- : SLPAR SRPAR basic_array_dimensions						{ $$ = $3; addLinkToList($$, $3);}		
- |															{ $$ = NULL;}
+ : SLPAR SRPAR basic_array_dimensions						{ $$ = $3; addLinkToList($$, NULL);}		
+ |															{ $$ = createEmptyListNode("BasicArrayDimensions");}
  ;
 									
 program_body																						
@@ -201,19 +201,19 @@ identifier
  ;
 
 expr
- : expr OR bint_term										{ $$ = createExprOrBindTermNode($1,$3);}
+ : expr OR bint_term										{ $$ = createExprOrBintTermNode($1,$3);}
  | bint_term												{ $$ = createBintTermExprNode($1);}
  ;
 
 bint_term 
- : bint_term AND bint_factor								{ $$ = createBindTermNode($1,$3);}
- | bint_factor												{ $$ = createBindTermNode($1);}
+ : bint_term AND bint_factor								{ $$ = createBintTermNode($1,$3);}
+ | bint_factor												{ $$ = createBintTermNode($1);}
  ;	
 
 bint_factor 
- : NOT bint_factor											{ $$ = createBindFactorNode($2);}
- | int_expr compare_op int_expr								{ $$ = createBindFactorNode($1,$2,$3);}
- | int_expr													{ $$ = createBindFactorNode($1);}	
+ : NOT bint_factor											{ $$ = createBintFactorNode($2);}
+ | int_expr compare_op int_expr								{ $$ = createBintFactorNode($1,$2,$3);}
+ | int_expr													{ $$ = createBintFactorNode($1);}	
  ;
 
 compare_op 

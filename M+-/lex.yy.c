@@ -562,8 +562,8 @@ char *yytext;
 #line 5 "M+-.lex"
 
 #include <stdio.h>
-#include "c.tab.h" 
 #include "ast.h"
+#include "c.tab.h" 
 
 
 void count();

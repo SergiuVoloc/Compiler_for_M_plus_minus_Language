@@ -1303,13 +1303,13 @@ yyreduce:
 
   case 12: /* array_dimensions: SLPAR expr SRPAR array_dimensions  */
 #line 138 "c.y"
-                                                                                {  (yyval.node) = (yyvsp[0].node); addLinkToList((yyval.node), (yyvsp[-2].node));}
+                                                                                { (yyval.node) = (yyvsp[0].node); addLinkToList((yyval.node), (yyvsp[-2].node));}
 #line 1308 "c.tab.c"
     break;
 
   case 13: /* array_dimensions: %empty  */
 #line 139 "c.y"
-                                                                                                                        { (yyval.node) = NULL;}
+                                                                                                                        { (yyval.node) = createEmptyListNode("ArrayDimensions");}
 #line 1314 "c.tab.c"
     break;
 
@@ -1363,13 +1363,13 @@ yyreduce:
 
   case 22: /* basic_array_dimensions: SLPAR SRPAR basic_array_dimensions  */
 #line 173 "c.y"
-                                                                                { (yyval.node) = (yyvsp[0].node); addLinkToList((yyval.node), (yyvsp[0].node));}
+                                                                                { (yyval.node) = (yyvsp[0].node); addLinkToList((yyval.node), NULL);}
 #line 1368 "c.tab.c"
     break;
 
   case 23: /* basic_array_dimensions: %empty  */
 #line 174 "c.y"
-                                                                                                                        { (yyval.node) = NULL;}
+                                                                                                                        { (yyval.node) = createEmptyListNode("BasicArrayDimensions");}
 #line 1374 "c.tab.c"
     break;
 
@@ -1441,7 +1441,7 @@ yyreduce:
 
   case 35: /* expr: expr OR bint_term  */
 #line 204 "c.y"
-                                                                                                { (yyval.node) = createExprOrBindTermNode((yyvsp[-2].node),(yyvsp[0].node));}
+                                                                                                { (yyval.node) = createExprOrBintTermNode((yyvsp[-2].node),(yyvsp[0].node));}
 #line 1446 "c.tab.c"
     break;
 
@@ -1453,31 +1453,31 @@ yyreduce:
 
   case 37: /* bint_term: bint_term AND bint_factor  */
 #line 209 "c.y"
-                                                                                        { (yyval.node) = createBindTermNode((yyvsp[-2].node),(yyvsp[0].node));}
+                                                                                        { (yyval.node) = createBintTermNode((yyvsp[-2].node),(yyvsp[0].node));}
 #line 1458 "c.tab.c"
     break;
 
   case 38: /* bint_term: bint_factor  */
 #line 210 "c.y"
-                                                                                                        { (yyval.node) = createBindTermNode((yyvsp[0].node));}
+                                                                                                        { (yyval.node) = createBintTermNode((yyvsp[0].node));}
 #line 1464 "c.tab.c"
     break;
 
   case 39: /* bint_factor: NOT bint_factor  */
 #line 214 "c.y"
-                                                                                                        { (yyval.node) = createBindFactorNode((yyvsp[0].node));}
+                                                                                                        { (yyval.node) = createBintFactorNode((yyvsp[0].node));}
 #line 1470 "c.tab.c"
     break;
 
   case 40: /* bint_factor: int_expr compare_op int_expr  */
 #line 215 "c.y"
-                                                                                        { (yyval.node) = createBindFactorNode((yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node));}
+                                                                                        { (yyval.node) = createBintFactorNode((yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node));}
 #line 1476 "c.tab.c"
     break;
 
   case 41: /* bint_factor: int_expr  */
 #line 216 "c.y"
-                                                                                                                { (yyval.node) = createBindFactorNode((yyvsp[0].node));}
+                                                                                                                { (yyval.node) = createBintFactorNode((yyvsp[0].node));}
 #line 1482 "c.tab.c"
     break;
 

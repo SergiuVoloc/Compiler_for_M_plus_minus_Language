@@ -27,14 +27,16 @@ Node* createMoreParametersNode();
 Node* createBasicDeclarationNode();
 Node* createBasicArrayDimensionsNode();
 Node* createProgramBodyNode();
-Node* createProgStmtsNode();
+Node* createFunBodyNode();
+Node* createProgStmtNode();
 Node* createIfStatement();
 Node* createWhileStatement();
 Node* createIdentifier();
 Node* createIdentifierNode();
-Node* createExprOrBindTermNode();
+Node* createExprOrBintTermNode();
 Node* createBintTermExprNode();
-Node* createBindFactorNode();
+Node* createBintTermNode();
+Node* createBintFactorNode();
 Node* createEqualNode();
 Node* createLessThanNode();
 Node* createGreaterNode();
@@ -50,14 +52,12 @@ Node* createIntFactorNode();
 Node* createModifierListNode();
 Node* createArgumentsNode();
 Node* createMoreArgumentsNode();
-
+Node* createEmptyListNode(const char* listName);
 
 
 Node* createTypeSpecifier(const char* typeName);
-Node* createProgramUnitNode(Node* declaration);
 Node* createDeclarationNode(Node* varFunDeclaration);
 Node* createFunctionDeclarationNode(Node* typeSpecifier, const char* functionName, Node* paramsList, Node* compoundStatement);
-Node* createVarDeclaration(Node* typeSpecifier, const char* varName, int value); //we need a version for each type of constant
 Node* createCompoundStatement(Node* localDeclList, Node* instructionsList);
 Node* createIfStatement(const char* identifierName, Node* thenStatement, Node* elseStatement);
 

@@ -64,7 +64,7 @@ extern Node* astRoot;
 int main()
 {
 	//int lexUnit = 0;
-	//yydebug = 1;
+	yydebug = 1;
 	yyin = fopen("input.csrc", "rt");
 	if (yyin != NULL)
 	{
