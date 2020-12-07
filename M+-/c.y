@@ -27,7 +27,7 @@ extern int yylex(void);
 %token ASSIGN 
 %token ADD 
 %token BOOL 
-%token IDENTIFIER 
+%token <strings> IDENTIFIER
 %token AND 
 %token BVAL 
 %token CEIL 
@@ -113,8 +113,8 @@ block
 
 
 declarations
- : declaration SEMICOLON declarations						{ $$ = createDeclarationsNode($1, $3);}
- |															{ $$ = NULL;}
+ : declaration SEMICOLON declarations						{ $$ = $3; addLinkToList($$, $1);}	
+ |															{ $$ = createEmptyListNode("Declarations");}			
  ;
 
 
@@ -151,18 +151,18 @@ fun_block
 
 
 param_list
- : LPAR parameters RPAR										{ $$ = createParamListNode("ParametersList", $2);} 			
+ : LPAR parameters RPAR										{ $$ = createListNode("ParametersList", $2);} 			
  ;
 
 
 parameters
  : basic_declaration more_parameters						{ $$ = createParametersNode($1, $2);}
- |															{ $$ = NULL;}
+ |															{ $$ = createEmptyListNode("Parameters");}
  ;
 
-more_parameters
- : COMMA basic_declaration more_parameters					{ $$ = createMoreParametersNode($2, $3);}
- |															{ $$ = NULL;} 
+more_parameters												
+ : COMMA basic_declaration more_parameters					{ $$ = $3; addLinkToList($$, $2);}		
+ |															{ $$ = createEmptyListNode("MoreParameters");}
  ;
 
 basic_declaration
@@ -183,14 +183,14 @@ fun_body
  ;
 
 prog_stmts		
- : prog_stmt SEMICOLON prog_stmts							{ $$ = createProgStmtsNode($1,$3);}
- |															{ $$ = NULL;}
+ : prog_stmt SEMICOLON prog_stmts							{ $$ = $3; addLinkToList($$, $1);}	
+ |															{ $$ = createEmptyListNode("ProgramStatement");}
  ;
 
  prog_stmt
   : IF expr THEN prog_stmt ELSE prog_stmt					{ $$ = createIfStatement($2, $4, $6);}
   | WHILE expr DO prog_stmt									{ $$ = createWhileStatement($2, $4);}
-  | READ identifier											{ $$ = createIdentifier($2);}
+  | READ identifier											{ $$ = Prog_stms_read_identifier($2);}
   | identifier ASSIGN expr									{ $$ = createProgStmtNode($1,$3);}
   | PRINT expr												{ $$ = createProgStmtNode($2);}
   | CLPAR block CRPAR										{ $$ = createProgStmtNode($2);}
@@ -201,8 +201,8 @@ identifier
  ;
 
 expr
- : expr OR bint_term										{ $$ = createExprOrBintTermNode($1,$3);}
- | bint_term												{ $$ = createBintTermExprNode($1);}
+ : expr OR bint_term										{ $$ = $1; addLinkToList($$, $3); }	
+ | bint_term												{ $$ = createListNode("Bind_term_expr", $1);}
  ;
 
 bint_term 
@@ -264,12 +264,12 @@ modifier_list
 
 arguments
  : expr more_arguments										{ $$ = createArgumentsNode($1,$2);}
- |															{ $$ = NULL;}
+ |															{ $$ = createEmptyListNode("Arguments");}
  ;
 
 more_arguments	
- : COMMA expr more_arguments								{ $$ = createMoreArgumentsNode($2,$3);}
- |															{ $$ = NULL;}
+ : COMMA expr more_arguments								{ $$ = $3; addLinkToList($$, $2);}	
+ |															{ $$ = createEmptyListNode("MoreArguments");}
  ;
 
 %%

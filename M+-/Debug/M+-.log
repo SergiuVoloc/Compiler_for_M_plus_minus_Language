@@ -1,13 +1,21 @@
-﻿  ast.c
+﻿  Main.c
+D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-\ast.h(55,94): warning C4028: formal parameter 1 different from declaration
+  ast.c
+D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-\ast.h(55,94): warning C4028: formal parameter 1 different from declaration
+D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-\ast.c(443,31): warning C4028: formal parameter 1 different from declaration
+D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-\ast.c(451,31): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'Node *'
   c.tab.c
-c.y(116,148): warning C4020: 'createDeclarationsNode': too many actual parameters
-c.y(186,125): warning C4013: 'createProgStmtsNode' undefined; assuming extern returning int
-c.y(186,159): warning C4047: '=': 'Node *' differs in levels of indirection from 'int'
+D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-\ast.h(55,94): warning C4028: formal parameter 1 different from declaration
 c.y(191,132): warning C4133: 'function': incompatible types - from 'Node *' to 'const char *'
+c.y(193,163): warning C4133: 'function': incompatible types - from 'Node *' to 'const char *'
+c.y(194,132): warning C4013: 'createProgStmtNode' undefined; assuming extern returning int
+c.y(194,166): warning C4047: '=': 'Node *' differs in levels of indirection from 'int'
+c.y(195,157): warning C4047: '=': 'Node *' differs in levels of indirection from 'int'
+c.y(196,150): warning C4047: '=': 'Node *' differs in levels of indirection from 'int'
   lex.yy.c
+D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-\ast.h(55,94): warning C4028: formal parameter 1 different from declaration
 M+-.lex(15,10): warning C4013: 'comment' undefined; assuming extern returning int
 lex.yy.c(1690,46): warning C4013: 'isatty' undefined; assuming extern returning int
-  Main.c
   Generating Code...
 D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-\M+-.lex(110): warning C4716: 'comment': must return a value
   M+-.vcxproj -> D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\Debug\M+-.exe

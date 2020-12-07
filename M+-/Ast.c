@@ -82,15 +82,15 @@ Node* createBlockNode(Node* declarations, Node* programBody) {
 
 }
 
-Node* createDeclarationsNode(Node* declaration)
-{
-	Node* retNode = createDefaultNode("Declarations", 1);
-	if (retNode)
-	{
-		retNode->links[0] = declaration;
-	}
-	return retNode;
-}
+//Node* createDeclarationsNode(Node* declaration)
+//{
+//	Node* retNode = createDefaultNode("Declarations", 1);
+//	if (retNode)
+//	{
+//		retNode->links[0] = declaration;
+//	}
+//	return retNode;
+//}
 
 Node* createDeclarationNode(Node* varFunDeclaration)
 {
@@ -104,7 +104,16 @@ Node* createDeclarationNode(Node* varFunDeclaration)
 
 Node* createVarDeclarationNode(Node* arrayDim, Node* type)
 {
-	return NULL;
+	Node* retNode = createDefaultNode("VarDeclaration", 2);
+
+	if (retNode)
+	{
+		retNode->links[0] = arrayDim;
+		retNode->links[1] = type;
+	}
+
+	return retNode;
+
 }
 
 
@@ -116,19 +125,33 @@ Node* createType(const char* typeName)
 	return retVal;
 }
 
-Node* createArrayDimensionsNode()
+
+
+Node* createFunDeclarationNode(Node* paramsList, Node* type, Node* funBlock)
 {
-	return NULL;
+	Node* retNode = createDefaultNode("FunDeclaration", 3);
+
+	if (retNode)
+	{
+		retNode->links[0] = paramsList;
+		retNode->links[1] = type;
+		retNode->links[2] = funBlock;
+	}
+
+	return retNode;
 }
 
-Node* createFunDeclarationNode()
+Node* createFunBlockNode(Node* declarations, Node* funBody)
 {
-	return NULL;
-}
+	Node* retNode = createDefaultNode("FunBlock", 2);
 
-Node* createFunBlockNode()
-{
-	return NULL;
+	if (retNode)
+	{
+		retNode->links[0] = declarations;
+		retNode->links[1] = funBody;
+	}
+
+	return retNode;
 }
 
 Node* createParamListNode()
@@ -136,9 +159,17 @@ Node* createParamListNode()
 	return NULL;
 }
 
-Node* createParametersNode()
+Node* createParametersNode(Node* basicDeclaration, Node* moreParameters)
 {
-	return NULL;
+	Node* retNode = createDefaultNode("Parameters", 2);
+
+	if (retNode)
+	{
+		retNode->links[0] = basicDeclaration;
+		retNode->links[1] = moreParameters;
+	}
+
+	return retNode;
 }
 
 Node* createMoreParametersNode()
@@ -146,24 +177,50 @@ Node* createMoreParametersNode()
 	return NULL;
 }
 
-Node* createBasicDeclarationNode()
+
+
+Node* createBasicDeclarationNode(Node* BS_dimensions, Node* type)
 {
-	return NULL;
+
+	Node* retNode = createDefaultNode("BasicDeclaration", 2);
+
+	if (retNode)
+	{
+		retNode->links[0] = BS_dimensions;
+		retNode->links[1] = type;
+	}
+	return retNode;
 }
+
+
+
 
 Node* createBasicArrayDimensionsNode()
 {
 	return NULL;
 }
 
-Node* createProgramBodyNode()
+Node* createProgramBodyNode(Node* programStatement)
 {
-	return NULL;
+	Node* retNode = createDefaultNode("ProgramBody", 1);
+
+	if (retNode)
+	{
+		retNode->links[0] = programStatement;
+	}
+	return retNode;
 }
 
-Node* createFunBodyNode()
+Node* createFunBodyNode(Node* programStatement, Node* expr)
 {
-	return NULL;
+	Node* retNode = createDefaultNode("FunBody", 2);
+
+	if (retNode)
+	{
+		retNode->links[0] = programStatement;
+		retNode->links[1] = expr;
+	}
+	return retNode;
 }
 
 Node* createProgStmtNode()
@@ -177,30 +234,65 @@ Node* createProgStmtsNode()
 }
 
 
-Node* createWhileStatement()
+Node* createWhileStatement(Node* expr, Node* doProg)
 {
-	return NULL;
+	Node* retNode = createDefaultNode("WhileStmt", 2);
+
+	if (retNode)
+	{
+		retNode->links[0] = expr;
+		retNode->links[1] = doProg;
+	}
+	return retNode;
 }
 
-Node* createIdentifier()
+//Node* Prog_stms_read_identifier(const char* identifier)
+//{
+//	Node* retVal = createDefaultNode("Read_Identifier", 0);
+//	if (identifier)
+//		/*sprintf(retVal->extraData, "%s", identifier);*/
+//	strcpy(retVal->extraData, identifier);
+//	return retVal;
+//}
+
+
+Node* Prog_stms_read_identifier( const char* identifier)
 {
-	return NULL;
+
+	Node* retNode = createDefaultNode("********", 0);
+
+	if (retNode)
+	{
+		if (identifier)
+			strcpy(retNode->extraData, identifier);
+	}
+
+	return retNode;
 }
 
-Node* createIdentifierNode()
+
+
+
+
+
+
+
+
+
+Node* createIdentifierNode(Node* array_dimensions)
 {
-	return NULL;
+	Node* retNode = createDefaultNode("Create_Identifier", 1);
+
+	if (retNode)
+	{
+		retNode->links[0] = array_dimensions;
+	}
+	return retNode;
 }
 
-Node* createExprOrBintTermNode()
-{
-	return NULL;
-}
 
-Node* createBintTermExprNode()
-{
-	return NULL;
-}
+
+
 
 Node* createBintTermNode()
 {
@@ -348,14 +440,15 @@ Node* createCompoundStatement(Node* localDeclList, Node* instructionsList)
 	return retNode;
 }
 
-Node* createIfStatement(const char* identifierName, Node* thenStatement, Node* elseStatement)
+Node* createIfStatement(Node* expr, Node* thenStatement, Node* elseStatement)
 {
 
-	Node* retNode = createDefaultNode("createIfStatement", 2);
-	retNode->links[0] = thenStatement;
-	retNode->links[1] = elseStatement;
-	if (identifierName)
-		sprintf(retNode->extraData, "%s", identifierName);
+	Node* retNode = createDefaultNode("createIfStatement", 3);
+	retNode->links[0] = expr;
+	retNode->links[1] = thenStatement;
+	retNode->links[2] = elseStatement;
+	if (expr)
+		sprintf(retNode->extraData, "%s", expr);
 	return retNode;
 }
 

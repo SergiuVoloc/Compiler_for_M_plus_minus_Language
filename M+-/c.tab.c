@@ -1255,13 +1255,13 @@ yyreduce:
 
   case 4: /* declarations: declaration SEMICOLON declarations  */
 #line 116 "c.y"
-                                                                                { (yyval.node) = createDeclarationsNode((yyvsp[-2].node), (yyvsp[0].node));}
+                                                                                { (yyval.node) = (yyvsp[0].node); addLinkToList((yyval.node), (yyvsp[-2].node));}
 #line 1260 "c.tab.c"
     break;
 
   case 5: /* declarations: %empty  */
 #line 117 "c.y"
-                                                                                                                        { (yyval.node) = NULL;}
+                                                                                                                        { (yyval.node) = createEmptyListNode("Declarations");}
 #line 1266 "c.tab.c"
     break;
 
@@ -1327,7 +1327,7 @@ yyreduce:
 
   case 16: /* param_list: LPAR parameters RPAR  */
 #line 154 "c.y"
-                                                                                                { (yyval.node) = createParamListNode("ParametersList", (yyvsp[-1].node));}
+                                                                                                { (yyval.node) = createListNode("ParametersList", (yyvsp[-1].node));}
 #line 1332 "c.tab.c"
     break;
 
@@ -1339,19 +1339,19 @@ yyreduce:
 
   case 18: /* parameters: %empty  */
 #line 160 "c.y"
-                                                                                                                        { (yyval.node) = NULL;}
+                                                                                                                        { (yyval.node) = createEmptyListNode("Parameters");}
 #line 1344 "c.tab.c"
     break;
 
   case 19: /* more_parameters: COMMA basic_declaration more_parameters  */
 #line 164 "c.y"
-                                                                                { (yyval.node) = createMoreParametersNode((yyvsp[-1].node), (yyvsp[0].node));}
+                                                                                { (yyval.node) = (yyvsp[0].node); addLinkToList((yyval.node), (yyvsp[-1].node));}
 #line 1350 "c.tab.c"
     break;
 
   case 20: /* more_parameters: %empty  */
 #line 165 "c.y"
-                                                                                                                        { (yyval.node) = NULL;}
+                                                                                                                        { (yyval.node) = createEmptyListNode("MoreParameters");}
 #line 1356 "c.tab.c"
     break;
 
@@ -1387,13 +1387,13 @@ yyreduce:
 
   case 26: /* prog_stmts: prog_stmt SEMICOLON prog_stmts  */
 #line 186 "c.y"
-                                                                                        { (yyval.node) = createProgStmtsNode((yyvsp[-2].node),(yyvsp[0].node));}
+                                                                                        { (yyval.node) = (yyvsp[0].node); addLinkToList((yyval.node), (yyvsp[-2].node));}
 #line 1392 "c.tab.c"
     break;
 
   case 27: /* prog_stmts: %empty  */
 #line 187 "c.y"
-                                                                                                                        { (yyval.node) = NULL;}
+                                                                                                                        { (yyval.node) = createEmptyListNode("ProgramStatement");}
 #line 1398 "c.tab.c"
     break;
 
@@ -1411,7 +1411,7 @@ yyreduce:
 
   case 30: /* prog_stmt: READ identifier  */
 #line 193 "c.y"
-                                                                                                        { (yyval.node) = createIdentifier((yyvsp[0].node));}
+                                                                                                        { (yyval.node) = Prog_stms_read_identifier((yyvsp[0].node));}
 #line 1416 "c.tab.c"
     break;
 
@@ -1441,13 +1441,13 @@ yyreduce:
 
   case 35: /* expr: expr OR bint_term  */
 #line 204 "c.y"
-                                                                                                { (yyval.node) = createExprOrBintTermNode((yyvsp[-2].node),(yyvsp[0].node));}
+                                                                                                { (yyval.node) = (yyvsp[-2].node); addLinkToList((yyval.node), (yyvsp[0].node)); }
 #line 1446 "c.tab.c"
     break;
 
   case 36: /* expr: bint_term  */
 #line 205 "c.y"
-                                                                                                        { (yyval.node) = createBintTermExprNode((yyvsp[0].node));}
+                                                                                                        { (yyval.node) = createListNode("Bind_term_expr", (yyvsp[0].node));}
 #line 1452 "c.tab.c"
     break;
 
@@ -1639,19 +1639,19 @@ yyreduce:
 
   case 68: /* arguments: %empty  */
 #line 267 "c.y"
-                                                                                                                        { (yyval.node) = NULL;}
+                                                                                                                        { (yyval.node) = createEmptyListNode("Arguments");}
 #line 1644 "c.tab.c"
     break;
 
   case 69: /* more_arguments: COMMA expr more_arguments  */
 #line 271 "c.y"
-                                                                                        { (yyval.node) = createMoreArgumentsNode((yyvsp[-1].node),(yyvsp[0].node));}
+                                                                                        { (yyval.node) = (yyvsp[0].node); addLinkToList((yyval.node), (yyvsp[-1].node));}
 #line 1650 "c.tab.c"
     break;
 
   case 70: /* more_arguments: %empty  */
 #line 272 "c.y"
-                                                                                                                        { (yyval.node) = NULL;}
+                                                                                                                        { (yyval.node) = createEmptyListNode("MoreArguments");}
 #line 1656 "c.tab.c"
     break;
 
