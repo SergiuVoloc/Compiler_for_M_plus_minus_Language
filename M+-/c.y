@@ -14,6 +14,7 @@ extern int yylex(void);
 	Node	*node;
 	char* strings;
 	int intVal;
+	float realVal;
 }
 
 %token END 
@@ -42,15 +43,15 @@ extern int yylex(void);
 %token FUN 
 %token GE 
 %token GT 
-%token ID 
-%token IVAL 
+%token <strings> ID 
+%token <intVal> IVAL 
 %token LE 
 %token MUL 
 %token NOT 
 %token OR 
 %token READ 
 %token RPAR 
-%token RVAL   
+%token <realVal> RVAL   
 %token REAL 
 %token PRINT
 %token SEMICOLON 
@@ -125,8 +126,9 @@ declaration
 
 
 var_declaration
- : VAR ID array_dimensions COLON type						{ $$ = createVarDeclarationNode($3, $5);}
+ : VAR ID array_dimensions COLON type						{ $$ = createVarDeclarationNode($2 ,$3, $5);}
  ;
+
 
 type 
  : INT														{ $$ = createType("INT");}
@@ -253,10 +255,10 @@ int_factor
  | FLOOR LPAR expr RPAR										{ $$ = createIntFactorFloorExprNode($3);}
  | CEIL LPAR expr RPAR										{ $$ = createIntFactorCeilExprNode($3);}
  | ID modifier_list											{ $$ = createIntFactorModifierListNode($2);}
- | IVAL														{ $$ = createIntFactorIvalNode("IVAL");}	
+ | IVAL														{ $$ = createIntFactorIvalNode($1);}	
  | RVAL														{ $$ = createIntFactorRvalNode("RVAL");}
  | BVAL														{ $$ = createIntFactorBvalNode("BVAL");}
- | SUB int_factor											{ $$ = $2; addLinkToList($$, NULL); }		
+ | SUB int_factor											{ $$ = createSubstractOperation($2); }		
  ;					
   
 modifier_list 

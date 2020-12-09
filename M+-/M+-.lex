@@ -64,9 +64,9 @@ void count();
 
 
 
-({alpha}+)([_{alpha}{digit}])*	{ count(); return(ID);}
-{digit}+						{ count(); return(IVAL);}  
-{digit}*.{digit}+				{ count(); return(RVAL);}
+({alpha}+)([_{alpha}{digit}])*	{ count(); yylval.strings= strdup(yytext); return(ID);}
+{digit}+						{ count(); yylval.intVal= atoi(yytext);    return(IVAL);}  
+{digit}*.{digit}+				{ count(); yylval.realVal= atof(yytext);   return(RVAL);}
 	
 
 

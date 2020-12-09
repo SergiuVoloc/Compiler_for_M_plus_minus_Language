@@ -1072,17 +1072,17 @@ YY_RULE_SETUP
 case 46:
 YY_RULE_SETUP
 #line 67 "M+-.lex"
-{ count(); return(ID);}
+{ count(); yylval.strings= strdup(yytext); return(ID);}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 68 "M+-.lex"
-{ count(); return(IVAL);}  
+{ count(); yylval.intVal= atoi(yytext);    return(IVAL);}  
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 69 "M+-.lex"
-{ count(); return(RVAL);}
+{ count(); yylval.realVal= atof(yytext);   return(RVAL);}
 	YY_BREAK
 case 49:
 /* rule 49 can match eol */

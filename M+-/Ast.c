@@ -84,6 +84,17 @@ Node* createProgStmt_block(Node* expr)
 	return retNode;
 }
 
+Node* createSubstractOperation(Node* intFactor)
+{
+	Node* retNode = createDefaultNode("SubtractOperation", 1);
+	if (retNode)
+	{
+		retNode->links[0] = intFactor;
+	}
+
+	return retNode;
+}
+
 
 
 void addLinkToList(Node* listNode, Node* linkToAdd)
@@ -128,7 +139,7 @@ Node* createDeclarationNode(Node* varFunDeclaration)
 	return retNode;
 }
 
-Node* createVarDeclarationNode(Node* arrayDim, Node* type)
+Node* createVarDeclarationNode(const char* ID, Node* arrayDim, Node* type)
 {
 	Node* retNode = createDefaultNode("VarDeclaration", 2);
 
@@ -136,6 +147,7 @@ Node* createVarDeclarationNode(Node* arrayDim, Node* type)
 	{
 		retNode->links[0] = arrayDim;
 		retNode->links[1] = type;
+		sprintf(retNode->extraData, "%s", ID);
 	}
 
 	return retNode;
@@ -253,15 +265,15 @@ Node* createWhileStatement(Node* expr, Node* doProg)
 
 
 
-Node* Prog_stms_read_identifier( const char* identifier)
+Node* Prog_stms_read_identifier( Node* identifier)
 {
 
-	Node* retNode = createDefaultNode("********", 0);
+	Node* retNode = createDefaultNode("read_identifier", 1);
 
 	if (retNode)
 	{
-		if (identifier)
-			strcpy(retNode->extraData, identifier);
+		retNode->links[0] = identifier;
+	
 	}
 
 	return retNode;
@@ -444,11 +456,11 @@ Node* createIntFactorModifierListNode(Node* modifier_list)
 	return retNode;
 }
 
-Node* createIntFactorIvalNode(const char* operatorName)
+Node* createIntFactorIvalNode(int value)
 {
 	Node* retVal = createDefaultNode("Ival", 0);
-	if (operatorName)
-		sprintf(retVal->extraData, "%s", operatorName);
+	
+		sprintf(retVal->extraData, "%d", value);
 	return retVal;
 }
 
@@ -511,8 +523,8 @@ Node* createIfStatement(Node* expr, Node* thenStatement, Node* elseStatement)
 	retNode->links[0] = expr;
 	retNode->links[1] = thenStatement;
 	retNode->links[2] = elseStatement;
-	if (expr)
-		sprintf(retNode->extraData, "%s", expr);
+	/*if (expr)
+		sprintf(retNode->extraData, "%s", expr);*/
 	return retNode;
 }
 

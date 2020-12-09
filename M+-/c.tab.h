@@ -115,8 +115,9 @@ union YYSTYPE
 	Node	*node;
 	char* strings;
 	int intVal;
+	float realVal;
 
-#line 120 "c.tab.h"
+#line 121 "c.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
