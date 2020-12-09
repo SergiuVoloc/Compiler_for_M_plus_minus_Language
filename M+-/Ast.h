@@ -14,7 +14,6 @@ typedef struct node {
 
 Node* createProgNode(Node* block);
 Node* createBlockNode(Node* declarations,Node* programBody);
-//Node* createDeclarationsNode(Node* declaration);
 Node* createDeclarationNode(Node* varFunDeclaration);
 Node* createVarDeclarationNode(Node* arrayDim, Node* type );
 Node* createType(const char* typeName);
@@ -28,31 +27,32 @@ Node* createIfStatement(Node* expr, Node* thenStatement, Node* elseStatement);
 Node* createWhileStatement(Node* expr, Node* doProg);
 Node* Prog_stms_read_identifier(const char* identifier);
 Node* createIdentifierNode(Node* array_dimensions);
-Node* createBintTermNode();
-Node* createBintFactorNode();
-Node* createEqualNode();
-Node* createLessThanNode();
-Node* createGreaterNode();
-Node* createLessOrEqualNode();
-Node* createGreaterOrEqualNode();
-Node* createIntExpressionNode();
-Node* createAdditionNode();
-Node* createSubtractionNode();
-Node* createIntTermNode();
-Node* createMultiplyNode();
-Node* createDivideNode();
-Node* createIntFactorNode();
-Node* createModifierListNode();
-Node* createArgumentsNode();
-Node* createMoreArgumentsNode();
+Node* createBintFactorNode(Node* firstIntExpr, Node* compareOperand, Node* secondIntExpr);
+Node* createEqualNode(const char* operatorName);
+Node* createLessThanNode(const char* operatorName);
+Node* createGreaterNode(const char* operatorName);
+Node* createLessOrEqualNode(const char* operatorName);
+Node* createGreaterOrEqualNode(const char* operatorName);
+Node* createAdditionNode(const char* operatorName);
+Node* createSubtractionNode(const char* operatorName);
+Node* createMultiplyNode(const char* operatorName);
+Node* createDivideNode(const char* operatorName);
+Node* createIntFactorExprNode(Node* expr);
+Node* createIntFactorArrayDimNode(Node* arrayDim);
+Node* createIntFactorFloatExprNode(Node* expr);
+Node* createIntFactorFloorExprNode(Node* expr);
+Node* createIntFactorCeilExprNode(Node* expr);
+Node* createIntFactorModifierListNode(Node* modifier_list);
+Node* createIntFactorIvalNode(const char* operatorName);
+Node* createIntFactorRvalNode(const char* operatorName);
+Node* createIntFactorBvalNode(const char* operatorName);
+Node* createModifierListArgumentsNode(Node* arguments);
+Node* createModifierListArrayDimNode(Node* array_dimensions);
+Node* createArgumentsNode(Node* expr, Node* more_arguments);
 Node* createEmptyListNode(const char* listName);
-
-
-Node* createTypeSpecifier(const char* typeName);
-Node* createDeclarationNode(Node* varFunDeclaration);
-Node* createFunctionDeclarationNode(Node* typeSpecifier, const char* functionName, Node* paramsList, Node* compoundStatement);
-Node* createCompoundStatement(Node* localDeclList, Node* instructionsList);
-Node* createIfStatement(const char* identifierName, Node* thenStatement, Node* elseStatement);
+Node* createProgStmt_assign_expr(Node* identifier, Node* expr);
+Node* createProgStmt_print_expr(Node* expr);
+Node* createProgStmt_block(Node* expr);
 
 Node* createDefaultNode(const char* nodeName, unsigned int linksCount);
 Node* resizeNodeLinks(Node* nodeToResize, unsigned int newSize);
@@ -60,3 +60,4 @@ Node* createListNode(const char* listName, Node* firstLink);
 void addLinkToList(Node* listNode, Node* linkToAdd);
 void printAst(Node* ast, int level);
 #endif
+

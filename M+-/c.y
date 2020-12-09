@@ -191,31 +191,33 @@ prog_stmts
   : IF expr THEN prog_stmt ELSE prog_stmt					{ $$ = createIfStatement($2, $4, $6);}
   | WHILE expr DO prog_stmt									{ $$ = createWhileStatement($2, $4);}
   | READ identifier											{ $$ = Prog_stms_read_identifier($2);}
-  | identifier ASSIGN expr									{ $$ = createProgStmtNode($1,$3);}
-  | PRINT expr												{ $$ = createProgStmtNode($2);}
-  | CLPAR block CRPAR										{ $$ = createProgStmtNode($2);}
+  | identifier ASSIGN expr									{ $$ = createProgStmt_assign_expr($1,$3);}
+  | PRINT expr												{ $$ = createProgStmt_print_expr($2);}
+  | CLPAR block CRPAR										{ $$ = createProgStmt_block($2);}
   ;
 
+ 
+
 identifier
- : ID array_dimensions										{ $$ = createIdentifierNode($2);}
+ : ID array_dimensions										{ $$ = createIdentifierNode($2);} 
  ;
 
 expr
  : expr OR bint_term										{ $$ = $1; addLinkToList($$, $3); }	
  | bint_term												{ $$ = createListNode("Bind_term_expr", $1);}
  ;
-
+				
 bint_term 
- : bint_term AND bint_factor								{ $$ = createBintTermNode($1,$3);}
- | bint_factor												{ $$ = createBintTermNode($1);}
+ : bint_term AND bint_factor								{ $$ = $1; addLinkToList($$, $3); }	
+ | bint_factor												{ $$ = createListNode("Bind_term_factor", $1);}
  ;	
-
+						
 bint_factor 
- : NOT bint_factor											{ $$ = createBintFactorNode($2);}
+ : NOT bint_factor											{ $$ = $2; addLinkToList($$, NULL);}	
  | int_expr compare_op int_expr								{ $$ = createBintFactorNode($1,$2,$3);}
- | int_expr													{ $$ = createBintFactorNode($1);}	
+ | int_expr													{ $$ = createListNode("Bind_factor_int_expr", $1);}	
  ;
-
+				
 compare_op 
  : EQUAL													{ $$ = createEqualNode("EQUAL");}
  | LT														{ $$ = createLessThanNode("LT");}
@@ -224,42 +226,42 @@ compare_op
  | GE														{ $$ = createGreaterOrEqualNode("GE");}
  ;
 
-int_expr 
- : int_expr addop int_term									{ $$ = createIntExpressionNode($1,$2,$3);}
- | int_term													{ $$ = createIntExpressionNode($1);}
+int_expr						
+ : int_expr addop int_term									{ $$ = $1; addLinkToList($$, $3); }	
+ | int_term													{ $$ = createListNode("Int_expr_term", $1);}
  ;
 
 addop 
  : ADD														{ $$ = createAdditionNode("ADD");}
- | SUB														{ $$ = createSubtractionNode("SUBB");}
+ | SUB														{ $$ = createSubtractionNode("SUB");}
  ;
 
 int_term
- : int_term mulop int_factor								{ $$ = createIntTermNode($1,$2,$3);}		
- | int_factor												{ $$ = createIntTermNode($1);}
+ : int_term mulop int_factor								{ $$ = $1; addLinkToList($$, $3); }		
+ | int_factor												{ $$ = createListNode("Int_term_factor", $1);}
  ;
 
 mulop
  : MUL														{ $$ = createMultiplyNode("MUL");}
  | DIV														{ $$ = createDivideNode("DIV");}
  ;
-
-int_factor
- : LPAR expr RPAR											{ $$ = createIntFactorNode($2);}
- | SIZE LPAR ID basic_array_dimensions RPAR					{ $$ = createIntFactorNode($4);}
- | FLOAT LPAR expr RPAR										{ $$ = createIntFactorNode($3);}
- | FLOOR LPAR expr RPAR										{ $$ = createIntFactorNode($3);}
- | CEIL LPAR expr RPAR										{ $$ = createIntFactorNode($3);}
- | ID modifier_list											{ $$ = createIntFactorNode($2);}
- | IVAL														{ $$ = createIntFactorNode("IVAL");}	
- | RVAL														{ $$ = createIntFactorNode("RVAL");}
- | BVAL														{ $$ = createIntFactorNode("BVAL");}
- | SUB int_factor											{ $$ = createIntFactorNode($2);}	
- ;
-
+					
+int_factor									
+ : LPAR expr RPAR											{ $$ = createIntFactorExprNode($2);}
+ | SIZE LPAR ID basic_array_dimensions RPAR					{ $$ = createIntFactorArrayDimNode($4);}
+ | FLOAT LPAR expr RPAR										{ $$ = createIntFactorFloatExprNode($3);}
+ | FLOOR LPAR expr RPAR										{ $$ = createIntFactorFloorExprNode($3);}
+ | CEIL LPAR expr RPAR										{ $$ = createIntFactorCeilExprNode($3);}
+ | ID modifier_list											{ $$ = createIntFactorModifierListNode($2);}
+ | IVAL														{ $$ = createIntFactorIvalNode("IVAL");}	
+ | RVAL														{ $$ = createIntFactorRvalNode("RVAL");}
+ | BVAL														{ $$ = createIntFactorBvalNode("BVAL");}
+ | SUB int_factor											{ $$ = $2; addLinkToList($$, NULL); }		
+ ;					
+  
 modifier_list 
- : LPAR arguments RPAR										{ $$ = createModifierListNode($2);}
- | array_dimensions											{ $$ = createModifierListNode($1);}
+ : LPAR arguments RPAR										{ $$ = createModifierListArgumentsNode($2);}
+ | array_dimensions											{ $$ = createModifierListArrayDimNode($1);}
  ;
 
 arguments
@@ -271,7 +273,7 @@ more_arguments
  : COMMA expr more_arguments								{ $$ = $3; addLinkToList($$, $2);}	
  |															{ $$ = createEmptyListNode("MoreArguments");}
  ;
-
+								
 %%
 
 int yyerror(char * s) 

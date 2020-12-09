@@ -50,6 +50,40 @@ Node* createEmptyListNode(const char* listName)
 	return retNode;
 }
 
+Node* createProgStmt_assign_expr(Node* identifier, Node* expr)
+{
+	Node* retNode = createDefaultNode("ProgStmt_assign_expr", 2);
+	if (retNode)
+	{
+		retNode->links[0] = identifier;
+		retNode->links[1] = expr;
+	}
+
+	return retNode;
+}
+
+Node* createProgStmt_print_expr(Node* expr)
+{
+	Node* retNode = createDefaultNode("ProgStmt_print_expr", 1);
+	if (retNode)
+	{
+		retNode->links[0] = expr;
+	}
+
+	return retNode;
+}
+
+Node* createProgStmt_block(Node* expr)
+{
+	Node* retNode = createDefaultNode("ProgStmt_block", 1);
+	if (retNode)
+	{
+		retNode->links[0] = expr;
+	}
+
+	return retNode;
+}
+
 
 
 void addLinkToList(Node* listNode, Node* linkToAdd)
@@ -82,15 +116,7 @@ Node* createBlockNode(Node* declarations, Node* programBody) {
 
 }
 
-//Node* createDeclarationsNode(Node* declaration)
-//{
-//	Node* retNode = createDefaultNode("Declarations", 1);
-//	if (retNode)
-//	{
-//		retNode->links[0] = declaration;
-//	}
-//	return retNode;
-//}
+
 
 Node* createDeclarationNode(Node* varFunDeclaration)
 {
@@ -141,6 +167,7 @@ Node* createFunDeclarationNode(Node* paramsList, Node* type, Node* funBlock)
 	return retNode;
 }
 
+
 Node* createFunBlockNode(Node* declarations, Node* funBody)
 {
 	Node* retNode = createDefaultNode("FunBlock", 2);
@@ -154,10 +181,7 @@ Node* createFunBlockNode(Node* declarations, Node* funBody)
 	return retNode;
 }
 
-Node* createParamListNode()
-{
-	return NULL;
-}
+
 
 Node* createParametersNode(Node* basicDeclaration, Node* moreParameters)
 {
@@ -170,11 +194,6 @@ Node* createParametersNode(Node* basicDeclaration, Node* moreParameters)
 	}
 
 	return retNode;
-}
-
-Node* createMoreParametersNode()
-{
-	return NULL;
 }
 
 
@@ -194,12 +213,6 @@ Node* createBasicDeclarationNode(Node* BS_dimensions, Node* type)
 
 
 
-
-Node* createBasicArrayDimensionsNode()
-{
-	return NULL;
-}
-
 Node* createProgramBodyNode(Node* programStatement)
 {
 	Node* retNode = createDefaultNode("ProgramBody", 1);
@@ -210,6 +223,7 @@ Node* createProgramBodyNode(Node* programStatement)
 	}
 	return retNode;
 }
+
 
 Node* createFunBodyNode(Node* programStatement, Node* expr)
 {
@@ -223,15 +237,6 @@ Node* createFunBodyNode(Node* programStatement, Node* expr)
 	return retNode;
 }
 
-Node* createProgStmtNode()
-{
-	return NULL;
-}
-
-Node* createProgStmtsNode()
-{
-	return NULL;
-}
 
 
 Node* createWhileStatement(Node* expr, Node* doProg)
@@ -246,14 +251,6 @@ Node* createWhileStatement(Node* expr, Node* doProg)
 	return retNode;
 }
 
-//Node* Prog_stms_read_identifier(const char* identifier)
-//{
-//	Node* retVal = createDefaultNode("Read_Identifier", 0);
-//	if (identifier)
-//		/*sprintf(retVal->extraData, "%s", identifier);*/
-//	strcpy(retVal->extraData, identifier);
-//	return retVal;
-//}
 
 
 Node* Prog_stms_read_identifier( const char* identifier)
@@ -272,13 +269,6 @@ Node* Prog_stms_read_identifier( const char* identifier)
 
 
 
-
-
-
-
-
-
-
 Node* createIdentifierNode(Node* array_dimensions)
 {
 	Node* retNode = createDefaultNode("Create_Identifier", 1);
@@ -292,151 +282,225 @@ Node* createIdentifierNode(Node* array_dimensions)
 
 
 
-
-
-Node* createBintTermNode()
+Node* createBintFactorNode(Node* firstIntExpr , Node* compareOperand, Node* secondIntExpr)
 {
-	return NULL;
-}
-
-Node* createBintFactorNode()
-{
-	return NULL;
-}
-
-Node* createEqualNode()
-{
-	return NULL;
-}
-
-Node* createLessThanNode()
-{
-	return NULL;
-}
-
-Node* createGreaterNode()
-{
-	return NULL;
-}
-
-Node* createLessOrEqualNode()
-{
-	return NULL;
-}
-
-Node* createGreaterOrEqualNode()
-{
-	return NULL;
-}
-
-Node* createIntExpressionNode()
-{
-	return NULL;
-}
-
-Node* createAdditionNode()
-{
-	return NULL;
-}
-
-Node* createSubtractionNode()
-{
-	return NULL;
-}
-
-Node* createIntTermNode()
-{
-	return NULL;
-}
-
-Node* createMultiplyNode()
-{
-	return NULL;
-}
-
-Node* createDivideNode()
-{
-	return NULL;
-}
-
-Node* createIntFactorNode()
-{
-	return NULL;
-}
-
-Node* createModifierListNode()
-{
-	return NULL;
-}
-
-Node* createArgumentsNode()
-{
-	return NULL;
-}
-
-Node* createMoreArgumentsNode()
-{
-	return NULL;
-}
-//
-//Node* createVarDeclarationNode(char* var, const char* ID, Node* arrayDim, Node* type) {
-//	Node* retNode = createDefaultNode("VarDeclaration", 2);
-//
-//	if (var)
-//		sprintf(retNode->extraData, "%s", var);
-//
-//
-//	if (retNode)
-//	{
-//		retNode->links[0] = arrayDim;
-//		retNode->links[1] = type;
-//		if (var)
-//			sprintf(retNode->extraData, "%s", var);
-//		sprintf(retNode->links[2]->extraData, "%s", ID);
-//	}
-//	return retNode;
-//}
-
-
-Node* createFunctionDeclarationNode(Node* typeSpecifier, const char* functionName, Node* paramsList, Node* compoundStatement)
-{
-
-	Node* retNode = createDefaultNode("FunctionDefinition", 3);
+	Node* retNode = createDefaultNode("BindFactor", 2);
 
 	if (retNode)
 	{
-		retNode->links[0] = typeSpecifier;
-		retNode->links[1] = paramsList;
-		retNode->links[2] = compoundStatement;
-		if (functionName)
-			strcpy(retNode->extraData, functionName);
+		retNode->links[0] = firstIntExpr;
+		retNode->links[1] = compareOperand;
+		retNode->links[1] = secondIntExpr;
 	}
-
 	return retNode;
 }
 
-Node* createVarDeclaration(int value, Node* type )
+
+Node* createEqualNode(const char* operatorName)
 {
-	Node* retNode = createDefaultNode("VariableDeclaration", 2);
+	Node* retVal = createDefaultNode("Equal", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+
+Node* createLessThanNode(const char* operatorName)
+{
+	Node* retVal = createDefaultNode("LessThan", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+
+Node* createGreaterNode(const char* operatorName)
+{
+	Node* retVal = createDefaultNode("Greater", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+
+Node* createLessOrEqualNode(const char* operatorName)
+{
+	Node* retVal = createDefaultNode("LessOrEqual", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+
+Node* createGreaterOrEqualNode(const char* operatorName)
+{
+	Node* retVal = createDefaultNode("GreaterOrEqual", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+
+Node* createAdditionNode(const char* operatorName)
+{
+
+	Node* retVal = createDefaultNode("AddOpAddition", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+
+Node* createSubtractionNode(const char* operatorName)
+{
+	Node* retVal = createDefaultNode("AddOpSubtraction", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+
+
+Node* createMultiplyNode(const char* operatorName)
+{
+	Node* retVal = createDefaultNode("Multiply", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+
+Node* createDivideNode(const char* operatorName)
+{
+	Node* retVal = createDefaultNode("Divide", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+Node* createIntFactorExprNode(Node* expr)
+{
+	Node* retNode = createDefaultNode("Int_factor_expr", 1);
 
 	if (retNode)
 	{
-		retNode->links[0] = type;
-		
-	
-		retNode->links[1] = createDefaultNode("IntValue", 0);
-		sprintf(retNode->links[1]->extraData, "%d", value);
+		retNode->links[0] = expr;
 	}
-
 	return retNode;
-
 }
 
-Node* createCompoundStatement(Node* localDeclList, Node* instructionsList)
+Node* createIntFactorArrayDimNode(Node* arrayDim)
 {
-	Node* retNode = createDefaultNode("CompoundStatement", 2);
-	retNode->links[0] = localDeclList;
-	retNode->links[1] = instructionsList;
+	Node* retNode = createDefaultNode("Int_factor_array_dim", 1);
+
+	if (retNode)
+	{
+		retNode->links[0] = arrayDim;
+	}
+	return retNode;
+}
+
+Node* createIntFactorFloatExprNode(Node* expr) 
+{
+	Node* retNode = createDefaultNode("Int_factor_float_expr", 1);
+
+	if (retNode)
+	{
+		retNode->links[0] = expr;
+	}
+	return retNode;
+}
+
+Node* createIntFactorFloorExprNode(Node* expr)
+{
+	Node* retNode = createDefaultNode("Int_factor_Floor_expr", 1);
+
+	if (retNode)
+	{
+		retNode->links[0] = expr;
+	}
+	return retNode;
+}
+
+Node* createIntFactorCeilExprNode(Node* expr)
+{
+	Node* retNode = createDefaultNode("Int_factor_Ceil_expr", 1);
+
+	if (retNode)
+	{
+		retNode->links[0] = expr;
+	}
+	return retNode;		
+}
+
+Node* createIntFactorModifierListNode(Node* modifier_list)
+{
+	Node* retNode = createDefaultNode("Create_Modifier_list", 1);
+
+	if (retNode)
+	{
+		retNode->links[0] = modifier_list;
+	}
+	return retNode;
+}
+
+Node* createIntFactorIvalNode(const char* operatorName)
+{
+	Node* retVal = createDefaultNode("Ival", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+Node* createIntFactorRvalNode(const char* operatorName)
+{
+	Node* retVal = createDefaultNode("Rval", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+Node* createIntFactorBvalNode(const char* operatorName)
+{
+	Node* retVal = createDefaultNode("Bval", 0);
+	if (operatorName)
+		sprintf(retVal->extraData, "%s", operatorName);
+	return retVal;
+}
+
+Node* createModifierListArgumentsNode(Node* arguments)
+{
+	Node* retNode = createDefaultNode("Modifier_List_Arguments", 1);
+
+	if (retNode)
+	{
+		retNode->links[0] = arguments;
+	}
+	return retNode;
+}
+
+
+Node* createModifierListArrayDimNode(Node* array_dimensions)
+{
+	Node* retNode = createDefaultNode("Modifier_List_Array_Dim", 1);
+
+	if (retNode)
+	{
+		retNode->links[0] = array_dimensions;
+	}
+	return retNode;
+}
+
+
+Node* createArgumentsNode(Node* expr, Node* more_arguments)
+{
+	Node* retNode = createDefaultNode("Create_More_Arguments", 2);
+
+	if (retNode)
+	{
+		retNode->links[0] = expr;
+		retNode->links[1] = more_arguments;
+	}
 	return retNode;
 }
 
@@ -451,17 +515,6 @@ Node* createIfStatement(Node* expr, Node* thenStatement, Node* elseStatement)
 		sprintf(retNode->extraData, "%s", expr);
 	return retNode;
 }
-
-Node* createTypeSpecifier(const char* typeName)
-{
-	Node* retVal = createDefaultNode("TypeSpecifier", 0);
-	if (typeName)
-		sprintf(retVal->extraData, "%s", typeName);
-	return retVal;
-}
-
-
-
 
 
 void printAst(Node* ast, int level)
