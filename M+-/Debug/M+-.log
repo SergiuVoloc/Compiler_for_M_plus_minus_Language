@@ -1,5 +1,4 @@
 ﻿  Main.c
-  ast.c
   c.tab.c
   lex.yy.c
 M+-.lex(15,10): warning C4013: 'comment' undefined; assuming extern returning int

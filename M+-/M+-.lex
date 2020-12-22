@@ -15,13 +15,13 @@ void count();
 "/*"		{ comment(); }
 "%"			{ comment(); } 
 
-"if"		{ count(); return(IF); }
-"then"		{ count(); return(THEN); }
+"if"		{ count(); yylval.strings= strdup(yytext); return(IF); }
+"then"		{ count(); yylval.strings= strdup(yytext); return(THEN); }
 "while"		{ count(); return(WHILE); }
 "do"		{ count(); return(DO); }
 "read"		{ count(); return(READ); }
 "real"		{ count(); return(REAL); }
-"else"		{ count(); return(ELSE); }
+"else"		{ count(); yylval.strings= strdup(yytext); return(ELSE); }
 "begin"		{ count(); return(BEGINN); }
 "end"		{ count(); return(END); }
 "int"		{ count(); return(INT); }
@@ -34,23 +34,23 @@ void count();
 "fun"		{ count(); return(FUN); }
 "return"	{ count(); return(RETURN);}
 "not"		{ count(); return(NOT); }
-"false"		{ count(); return(BVAL);} 
-"true"		{ count(); return(BVAL);}	
+"false"		{ count(); yylval.strings= strdup(yytext); return(BVAL);} 
+"true"		{ count(); yylval.strings= strdup(yytext); return(BVAL);}	
 "print"		{ count(); return(PRINT);}
 
 
 ":="			{ count(); return(ASSIGN); }
-"+"				{ count(); return(ADD); }
-"-"				{ count(); return(SUB); }
-"*"				{ count(); return(MUL); }
-"/"				{ count(); return(DIV); }
+"+"				{ count(); yylval.strings= strdup(yytext); return(ADD); }
+"-"				{ count(); yylval.strings= strdup(yytext); return(SUB); }
+"*"				{ count(); yylval.strings= strdup(yytext); return(MUL); }
+"/"				{ count(); yylval.strings= strdup(yytext); return(DIV); }
 "&&"			{ count(); return(AND); }
 "||"			{ count(); return(OR); }
-"="				{ count(); return(EQUAL); }
-"<"				{ count(); return(LT); }
-">"				{ count(); return(GT); }
-"=<"			{ count(); return(LE); }
-"=>"			{ count(); return(GE); }
+"="				{ count(); yylval.strings= strdup(yytext); return(EQUAL); }
+"<"				{ count(); yylval.strings= strdup(yytext); return(LT); }
+">"				{ count(); yylval.strings= strdup(yytext); return(GT); }
+"=<"			{ count(); yylval.strings= strdup(yytext); return(LE); }
+"=>"			{ count(); yylval.strings= strdup(yytext); return(GE); }
 "("				{ count(); return(LPAR); }
 ")"				{ count(); return(RPAR); }
 "{"				{ count(); return(CLPAR); }
