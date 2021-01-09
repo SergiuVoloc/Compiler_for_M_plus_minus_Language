@@ -27,12 +27,6 @@
     <ClCompile Include="Main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SymbolsList.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SemanticAnalyzer.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="c.y" />
@@ -46,10 +40,7 @@
     <ClInclude Include="ast.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SymbolsList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SemanticAnalyzer.h">
+    <ClInclude Include="Main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

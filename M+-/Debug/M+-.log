@@ -1,8 +1,9 @@
-﻿  c.tab.c
+﻿  Main.c
+  c.tab.c
   lex.yy.c
 M+-.lex(15,10): warning C4013: 'comment' undefined; assuming extern returning int
 M+-.lex(69,40): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 lex.yy.c(1690,46): warning C4013: 'isatty' undefined; assuming extern returning int
   Generating Code...
-D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-Project\M+-\M+-.lex(110): warning C4716: 'comment': must return a value
-  M+-.vcxproj -> D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-Project\Debug\M+-.exe
+D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\M+-\M+-.lex(110): warning C4716: 'comment': must return a value
+  M+-.vcxproj -> D:\Univer\PT_(Proiectarea_translatoarelor)\Lab\Project 1\My_Project\M+-Project\Debug\M+-.exe
