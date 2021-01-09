@@ -857,12 +857,12 @@ YY_RULE_SETUP
 case 3:
 YY_RULE_SETUP
 #line 18 "M+-.lex"
-{ count(); return(IF); }
+{ count(); yylval.strings= strdup(yytext); return(IF); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 19 "M+-.lex"
-{ count(); return(THEN); }
+{ count(); yylval.strings= strdup(yytext); return(THEN); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
@@ -887,7 +887,7 @@ YY_RULE_SETUP
 case 9:
 YY_RULE_SETUP
 #line 24 "M+-.lex"
-{ count(); return(ELSE); }
+{ count(); yylval.strings= strdup(yytext); return(ELSE); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
@@ -952,12 +952,12 @@ YY_RULE_SETUP
 case 22:
 YY_RULE_SETUP
 #line 37 "M+-.lex"
-{ count(); return(BVAL);} 
+{ count(); yylval.strings= strdup(yytext); return(BVAL);} 
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 38 "M+-.lex"
-{ count(); return(BVAL);}	
+{ count(); yylval.strings= strdup(yytext); return(BVAL);}	
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
@@ -972,22 +972,22 @@ YY_RULE_SETUP
 case 26:
 YY_RULE_SETUP
 #line 43 "M+-.lex"
-{ count(); return(ADD); }
+{ count(); yylval.strings= strdup(yytext); return(ADD); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 44 "M+-.lex"
-{ count(); return(SUB); }
+{ count(); yylval.strings= strdup(yytext); return(SUB); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 45 "M+-.lex"
-{ count(); return(MUL); }
+{ count(); yylval.strings= strdup(yytext); return(MUL); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 46 "M+-.lex"
-{ count(); return(DIV); }
+{ count(); yylval.strings= strdup(yytext); return(DIV); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
@@ -1002,27 +1002,27 @@ YY_RULE_SETUP
 case 32:
 YY_RULE_SETUP
 #line 49 "M+-.lex"
-{ count(); return(EQUAL); }
+{ count(); yylval.strings= strdup(yytext); return(EQUAL); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 50 "M+-.lex"
-{ count(); return(LT); }
+{ count(); yylval.strings= strdup(yytext); return(LT); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 51 "M+-.lex"
-{ count(); return(GT); }
+{ count(); yylval.strings= strdup(yytext); return(GT); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 52 "M+-.lex"
-{ count(); return(LE); }
+{ count(); yylval.strings= strdup(yytext); return(LE); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 53 "M+-.lex"
-{ count(); return(GE); }
+{ count(); yylval.strings= strdup(yytext); return(GE); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP

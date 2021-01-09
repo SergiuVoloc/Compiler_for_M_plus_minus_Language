@@ -116,8 +116,9 @@ union YYSTYPE
 	char* strings;
 	int intVal;
 	float realVal;
+	bool boolVal;
 
-#line 121 "c.tab.h"
+#line 122 "c.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
