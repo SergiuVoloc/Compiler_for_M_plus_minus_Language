@@ -164,8 +164,12 @@ win_bison c.y --defines
   <ItemGroup>
     <ClInclude Include="ast.h" />
     <ClInclude Include="c.tab.h" />
+<<<<<<< HEAD
     <ClInclude Include="SemanticAnalyzer.h" />
     <ClInclude Include="SymbolsList.h" />
+=======
+    <ClInclude Include="Main.h" />
+>>>>>>> 8808f5e9534d4330ba404df17c71e4e35782736d
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

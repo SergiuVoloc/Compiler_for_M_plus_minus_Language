@@ -1,4 +1,4 @@
-#pragma once					
+#pragma once
 
 #define MAX_SYMBOL_NAME 255
 #define MAX_DATATYPE_NAME 50

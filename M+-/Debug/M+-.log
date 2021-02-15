@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿  c.tab.c
+=======
+﻿  Main.c
+  c.tab.c
+>>>>>>> 8808f5e9534d4330ba404df17c71e4e35782736d
   lex.yy.c
 M+-.lex(15,10): warning C4013: 'comment' undefined; assuming extern returning int
 M+-.lex(69,40): warning C4244: '=': conversion from 'double' to 'float', possible loss of data

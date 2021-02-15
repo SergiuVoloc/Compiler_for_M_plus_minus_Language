@@ -187,7 +187,7 @@ fun_body
 
 prog_stmts		
  : prog_stmt SEMICOLON prog_stmts							{ $$ = $3; addLinkToList($$, $1);}	
- |															{ $$ = createEmptyListNode("ProgramStatement");}
+ |															{ $$ = createEmptyListNode("ProgramStatementEmpty");}
  ;
 
  prog_stmt

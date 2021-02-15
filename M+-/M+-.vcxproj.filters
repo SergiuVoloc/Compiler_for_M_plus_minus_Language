@@ -46,10 +46,14 @@
     <ClInclude Include="ast.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="SymbolsList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SemanticAnalyzer.h">
+=======
+    <ClInclude Include="Main.h">
+>>>>>>> 8808f5e9534d4330ba404df17c71e4e35782736d
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
