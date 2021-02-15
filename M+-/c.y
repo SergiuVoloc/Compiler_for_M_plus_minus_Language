@@ -15,38 +15,39 @@ extern int yylex(void);
 	char* strings;
 	int intVal;
 	float realVal;
+	bool boolVal;
 }
 
 %token END 
 %token INT 
 %token WHILE 
 %token FLOAT 
-%token IF 
-%token ELSE 
+%token <strings> IF 
+%token <strings> ELSE 
 %token RETURN 
 %token STRING_LITERAL 
 %token ASSIGN 
-%token ADD 
-%token BOOL 
+%token <strings> ADD 
+%token <boolVal> BOOL 
 %token <strings> IDENTIFIER
 %token AND 
-%token BVAL 
+%token <strings> BVAL 
 %token CEIL 
 %token CLPAR 
 %token COLON 
 %token COMMA 
 %token CRPAR 
-%token DIV 
+%token <strings> DIV 
 %token DO 
-%token EQUAL 
+%token <strings> EQUAL 
 %token FLOOR 
 %token FUN 
-%token GE 
-%token GT 
+%token <strings> GE 
+%token <strings> GT 
 %token <strings> ID 
 %token <intVal> IVAL 
-%token LE 
-%token MUL 
+%token <strings> LE 
+%token <strings> MUL 
 %token NOT 
 %token OR 
 %token READ 
@@ -58,11 +59,11 @@ extern int yylex(void);
 %token SIZE 
 %token SLPAR 
 %token SRPAR 
-%token SUB 
-%token THEN 
+%token <strings> SUB 
+%token <strings> THEN 
 %token VAR 
 %token LPAR 
-%token LT 
+%token <strings> LT 
 %token BEGINN
 
 %type <node> prog
@@ -143,7 +144,7 @@ array_dimensions
 
 
 fun_declaration
- : FUN ID param_list COLON type CLPAR fun_block CRPAR		{ $$ = createFunDeclarationNode($3, $5, $7);}  
+ : FUN ID param_list COLON type CLPAR fun_block CRPAR		{ $$ = createFunDeclarationNode($2, $3, $5, $7);}  
  ;
 
 
@@ -168,7 +169,7 @@ more_parameters
  ;
 
 basic_declaration
- : ID basic_array_dimensions COLON type						{ $$ = createBasicDeclarationNode($2, $4);}
+ : ID basic_array_dimensions COLON type						{ $$ = createBasicDeclarationNode($1,$2, $4);}
  ;
 
 basic_array_dimensions 
@@ -190,7 +191,7 @@ prog_stmts
  ;
 
  prog_stmt
-  : IF expr THEN prog_stmt ELSE prog_stmt					{ $$ = createIfStatement($2, $4, $6);}
+  : IF expr THEN prog_stmt ELSE prog_stmt					{ $$ = createIfStatement($1, $2, $3, $4, $5, $6);}
   | WHILE expr DO prog_stmt									{ $$ = createWhileStatement($2, $4);}
   | READ identifier											{ $$ = Prog_stms_read_identifier($2);}
   | identifier ASSIGN expr									{ $$ = createProgStmt_assign_expr($1,$3);}
@@ -201,7 +202,7 @@ prog_stmts
  
 
 identifier
- : ID array_dimensions										{ $$ = createIdentifierNode($2);} 
+ : ID array_dimensions										{ $$ = createIdentifierNode($1,$2);} 
  ;
 
 expr
@@ -221,11 +222,11 @@ bint_factor
  ;
 				
 compare_op 
- : EQUAL													{ $$ = createEqualNode("EQUAL");}
- | LT														{ $$ = createLessThanNode("LT");}
- | GT														{ $$ = createGreaterNode("GT");}
- | LE														{ $$ = createLessOrEqualNode("LE");}
- | GE														{ $$ = createGreaterOrEqualNode("GE");}
+ : EQUAL													{ $$ = createEqualNode($1);}
+ | LT														{ $$ = createLessThanNode($1);}
+ | GT														{ $$ = createGreaterNode($1);}
+ | LE														{ $$ = createLessOrEqualNode($1);}
+ | GE														{ $$ = createGreaterOrEqualNode($1);}
  ;
 
 int_expr						
@@ -234,8 +235,8 @@ int_expr
  ;
 
 addop 
- : ADD														{ $$ = createAdditionNode("ADD");}
- | SUB														{ $$ = createSubtractionNode("SUB");}
+ : ADD														{ $$ = createAdditionNode($1);}
+ | SUB														{ $$ = createSubtractionNode($1);}
  ;
 
 int_term
@@ -244,8 +245,8 @@ int_term
  ;
 
 mulop
- : MUL														{ $$ = createMultiplyNode("MUL");}
- | DIV														{ $$ = createDivideNode("DIV");}
+ : MUL														{ $$ = createMultiplyNode($1);}
+ | DIV														{ $$ = createDivideNode($1);}
  ;
 					
 int_factor									
@@ -254,11 +255,11 @@ int_factor
  | FLOAT LPAR expr RPAR										{ $$ = createIntFactorFloatExprNode($3);}
  | FLOOR LPAR expr RPAR										{ $$ = createIntFactorFloorExprNode($3);}
  | CEIL LPAR expr RPAR										{ $$ = createIntFactorCeilExprNode($3);}
- | ID modifier_list											{ $$ = createIntFactorModifierListNode($2);}
+ | ID modifier_list											{ $$ = createIntFactorModifierListNode($1,$2);}
  | IVAL														{ $$ = createIntFactorIvalNode($1);}	
- | RVAL														{ $$ = createIntFactorRvalNode("RVAL");}
- | BVAL														{ $$ = createIntFactorBvalNode("BVAL");}
- | SUB int_factor											{ $$ = createSubstractOperation($2); }		
+ | RVAL														{ $$ = createIntFactorRvalNode($1);}
+ | BVAL														{ $$ = createIntFactorBvalNode($1);}
+ | SUB int_factor											{ $$ = createSubstractOperation($1,$2); }		
  ;					
   
 modifier_list 

@@ -5,11 +5,12 @@
 //#include "symbols.h"
 #include <errno.h>
 #include "ast.h"
+#include "SemanticAnalyzer.h"
 
  
 extern int yyparse(void);
 extern FILE* yyin;
-//extern int yylex(void);
+extern int yylex(void);
 extern int yydebug;
 extern Node* astRoot;
 
@@ -87,6 +88,9 @@ int main()
 			break;
 		}
 		printAst(astRoot, 0);
+
+		symTableEntryList = malloc(sizeof(SymTableEntry) * 1000);
+
 		fclose(yyin);
 	}
 	else
@@ -94,4 +98,16 @@ int main()
 		printf("Fisier inexistent");
 	}
 
+	SymbolsList* symTable = generateSymbolsTable(astRoot);
+	if (symTable)
+	{
+		printSymbolsList(symTable);
+	}
+	else
+	{
+		printf("Unable to generate symbols table. Probably not enough memory available");
+	}
+
 }
+
+

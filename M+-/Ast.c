@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "ast.h"
+#include <stdbool.h>
 
 Node* createDefaultNode(const char* nodeName, unsigned int linksCount)
 {
@@ -47,8 +48,12 @@ Node* createListNode(const char* listName, Node* firstLink)
 Node* createEmptyListNode(const char* listName)
 {
 	Node* retNode = createDefaultNode(listName, 0);
+	sprintf(retNode->extraData, "%s", listName);
 	return retNode;
 }
+
+
+
 
 Node* createProgStmt_assign_expr(Node* identifier, Node* expr)
 {
@@ -84,12 +89,13 @@ Node* createProgStmt_block(Node* expr)
 	return retNode;
 }
 
-Node* createSubstractOperation(Node* intFactor)
+Node* createSubstractOperation(const char* opName, Node* intFactor)
 {
 	Node* retNode = createDefaultNode("SubtractOperation", 1);
 	if (retNode)
 	{
 		retNode->links[0] = intFactor;
+		sprintf(retNode->extraData, "%s", opName);
 	}
 
 	return retNode;
@@ -139,6 +145,7 @@ Node* createDeclarationNode(Node* varFunDeclaration)
 	return retNode;
 }
 
+
 Node* createVarDeclarationNode(const char* ID, Node* arrayDim, Node* type)
 {
 	Node* retNode = createDefaultNode("VarDeclaration", 2);
@@ -165,7 +172,7 @@ Node* createType(const char* typeName)
 
 
 
-Node* createFunDeclarationNode(Node* paramsList, Node* type, Node* funBlock)
+Node* createFunDeclarationNode(const char* ID, Node* paramsList, Node* type, Node* funBlock)
 {
 	Node* retNode = createDefaultNode("FunDeclaration", 3);
 
@@ -174,6 +181,7 @@ Node* createFunDeclarationNode(Node* paramsList, Node* type, Node* funBlock)
 		retNode->links[0] = paramsList;
 		retNode->links[1] = type;
 		retNode->links[2] = funBlock;
+		sprintf(retNode->extraData, "%s", ID);
 	}
 
 	return retNode;
@@ -210,7 +218,7 @@ Node* createParametersNode(Node* basicDeclaration, Node* moreParameters)
 
 
 
-Node* createBasicDeclarationNode(Node* BS_dimensions, Node* type)
+Node* createBasicDeclarationNode(const char* ID, Node* BS_dimensions, Node* type)
 {
 
 	Node* retNode = createDefaultNode("BasicDeclaration", 2);
@@ -219,6 +227,7 @@ Node* createBasicDeclarationNode(Node* BS_dimensions, Node* type)
 	{
 		retNode->links[0] = BS_dimensions;
 		retNode->links[1] = type;
+		sprintf(retNode->extraData, "%s", ID);
 	}
 	return retNode;
 }
@@ -281,13 +290,14 @@ Node* Prog_stms_read_identifier( Node* identifier)
 
 
 
-Node* createIdentifierNode(Node* array_dimensions)
+Node* createIdentifierNode(const char* ID, Node* array_dimensions)
 {
 	Node* retNode = createDefaultNode("Create_Identifier", 1);
 
 	if (retNode)
 	{
 		retNode->links[0] = array_dimensions;
+		sprintf(retNode->extraData, "%s", ID);
 	}
 	return retNode;
 }
@@ -311,8 +321,9 @@ Node* createBintFactorNode(Node* firstIntExpr , Node* compareOperand, Node* seco
 Node* createEqualNode(const char* operatorName)
 {
 	Node* retVal = createDefaultNode("Equal", 0);
-	if (operatorName)
-		sprintf(retVal->extraData, "%s", operatorName);
+
+	sprintf(retVal->extraData, "%s", operatorName);
+
 	return retVal;
 }
 
@@ -320,7 +331,7 @@ Node* createEqualNode(const char* operatorName)
 Node* createLessThanNode(const char* operatorName)
 {
 	Node* retVal = createDefaultNode("LessThan", 0);
-	if (operatorName)
+
 		sprintf(retVal->extraData, "%s", operatorName);
 	return retVal;
 }
@@ -329,7 +340,7 @@ Node* createLessThanNode(const char* operatorName)
 Node* createGreaterNode(const char* operatorName)
 {
 	Node* retVal = createDefaultNode("Greater", 0);
-	if (operatorName)
+	
 		sprintf(retVal->extraData, "%s", operatorName);
 	return retVal;
 }
@@ -338,7 +349,7 @@ Node* createGreaterNode(const char* operatorName)
 Node* createLessOrEqualNode(const char* operatorName)
 {
 	Node* retVal = createDefaultNode("LessOrEqual", 0);
-	if (operatorName)
+	
 		sprintf(retVal->extraData, "%s", operatorName);
 	return retVal;
 }
@@ -347,7 +358,7 @@ Node* createLessOrEqualNode(const char* operatorName)
 Node* createGreaterOrEqualNode(const char* operatorName)
 {
 	Node* retVal = createDefaultNode("GreaterOrEqual", 0);
-	if (operatorName)
+
 		sprintf(retVal->extraData, "%s", operatorName);
 	return retVal;
 }
@@ -357,7 +368,7 @@ Node* createAdditionNode(const char* operatorName)
 {
 
 	Node* retVal = createDefaultNode("AddOpAddition", 0);
-	if (operatorName)
+
 		sprintf(retVal->extraData, "%s", operatorName);
 	return retVal;
 }
@@ -366,7 +377,7 @@ Node* createAdditionNode(const char* operatorName)
 Node* createSubtractionNode(const char* operatorName)
 {
 	Node* retVal = createDefaultNode("AddOpSubtraction", 0);
-	if (operatorName)
+
 		sprintf(retVal->extraData, "%s", operatorName);
 	return retVal;
 }
@@ -376,7 +387,7 @@ Node* createSubtractionNode(const char* operatorName)
 Node* createMultiplyNode(const char* operatorName)
 {
 	Node* retVal = createDefaultNode("Multiply", 0);
-	if (operatorName)
+
 		sprintf(retVal->extraData, "%s", operatorName);
 	return retVal;
 }
@@ -385,7 +396,7 @@ Node* createMultiplyNode(const char* operatorName)
 Node* createDivideNode(const char* operatorName)
 {
 	Node* retVal = createDefaultNode("Divide", 0);
-	if (operatorName)
+
 		sprintf(retVal->extraData, "%s", operatorName);
 	return retVal;
 }
@@ -445,13 +456,14 @@ Node* createIntFactorCeilExprNode(Node* expr)
 	return retNode;		
 }
 
-Node* createIntFactorModifierListNode(Node* modifier_list)
+Node* createIntFactorModifierListNode(const char* ID, Node* modifier_list)
 {
 	Node* retNode = createDefaultNode("Create_Modifier_list", 1);
 
 	if (retNode)
 	{
 		retNode->links[0] = modifier_list;
+		sprintf(retNode->extraData, "%s", ID);
 	}
 	return retNode;
 }
@@ -464,21 +476,26 @@ Node* createIntFactorIvalNode(int value)
 	return retVal;
 }
 
-Node* createIntFactorRvalNode(const char* operatorName)
+Node* createIntFactorRvalNode(float value)
 {
 	Node* retVal = createDefaultNode("Rval", 0);
-	if (operatorName)
-		sprintf(retVal->extraData, "%s", operatorName);
+
+	sprintf(retVal->extraData, "%f", value);
 	return retVal;
 }
 
-Node* createIntFactorBvalNode(const char* operatorName)
+Node* createIntFactorBvalNode(const char* value)
 {
 	Node* retVal = createDefaultNode("Bval", 0);
-	if (operatorName)
-		sprintf(retVal->extraData, "%s", operatorName);
+
+	sprintf(retVal->extraData, "%s", value);
+	
 	return retVal;
 }
+
+
+
+
 
 Node* createModifierListArgumentsNode(Node* arguments)
 {
@@ -516,15 +533,23 @@ Node* createArgumentsNode(Node* expr, Node* more_arguments)
 	return retNode;
 }
 
-Node* createIfStatement(Node* expr, Node* thenStatement, Node* elseStatement)
+Node* createIfStatement(const char* IfText, Node* expr, const char* ThenText, Node* thenStatement, const char* ElseText, Node* elseStatement)
 {
 
-	Node* retNode = createDefaultNode("createIfStatement", 3);
+	Node* retNode = createDefaultNode("IfStatement", 3);
 	retNode->links[0] = expr;
 	retNode->links[1] = thenStatement;
 	retNode->links[2] = elseStatement;
-	/*if (expr)
-		sprintf(retNode->extraData, "%s", expr);*/
+
+
+		if (IfText != 0)
+		sprintf(retNode->extraData, "%s", IfText);
+		else if (ThenText)
+		sprintf(retNode->extraData, "%s", ThenText);
+		else if (ElseText)
+		sprintf(retNode->extraData, "%s", ElseText);
+
+
 	return retNode;
 }
 
